@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BShop后台首页</title>
+  </head>
+  <body>
+    <div>
+      <p>你最近登录的IP为: <span>{$last_login_ip}</span></p>
+      <p>你最近登录的时间为: <span>{$last_login_time|date='Y-m-d H:i:s', ###}</span></p>
+      <p>
+      <h4>账户管理操作:</h4>
+        <ul>
+          <li><a href="{:U('User/logout')}">登出</a></li>
+          <li><a href="{:U('User/passwd')}">修改密码</a></li>
+          <li><a href="{:U('User/profile')}">修改个人信息</a></li>
+        </ul>
+      </p>
+    </div>
+    <div>
+      <h2>用户管理操作</h2>
+      <div>
+        <ul>
+          <li><a href="{:U('User/list')}">用户列表</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h2>图书管理操作</h2>
+      <div>
+        <ul>
+          <li><a href="{:U('Book/new')}">新加图书</a></li>
+          <li><a href="{:U('Book/list')}">图书列表</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h2>订单管理操作</h2>
+      <div>
+        <ul>
+          <li><a href="{:U('Order/list')}">订单列表</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h2>评论管理操作</h2>
+      <div>
+        <ul>
+          <li><a href="{:U('Review/list')}">评论列表</a></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
+
