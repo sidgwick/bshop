@@ -2,7 +2,7 @@
 namespace Admin\Controller;
 use \Think\Controller;
 
-class UserController extends \Think\Controller {
+class AccountController extends \Think\Controller {
 
     /**
      * 登录界面

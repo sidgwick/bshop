@@ -10,7 +10,7 @@ class AdminController extends Controller {
         $uid = check_login();
         // 未登录的用户, 一概转到登录界面去登录
         if (!$uid) {
-            $this->redirect('User/login');
+            $this->redirect('Account/login');
         }
 
         $this->uinfo = session('userinfo');
