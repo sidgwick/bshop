@@ -4,7 +4,7 @@ use \Think\Controller;
 
 class AccountController extends \Think\Controller {
 
-    /**
+    /*
      * 登录界面
      */
     public function login() {
@@ -20,7 +20,7 @@ class AccountController extends \Think\Controller {
         }
     }
 
-    /**
+    /*
      * 处理登录
      */
     protected function doLogin() {
@@ -51,7 +51,7 @@ class AccountController extends \Think\Controller {
         }
     }
 
-    /**
+    /*
      * 登出处理
      */
     public function logout() {
@@ -116,4 +116,47 @@ class AccountController extends \Think\Controller {
         }
     }
 
+    /*
+     * 修改个人信息
+     */
+    public function profile() {
+        // 先检测登录状态
+        $auid = check_login();
+        if (!$auid) {
+            $this->redirect('login');
+        }
+
+        if (IS_POST) {
+            $this->doProfile($auid);
+        } else {
+            // 取出用户原始信息
+            $db = M('admin');
+            $where['auid'] = $auid;
+            $uinfo = $db->where($where)->find();
+
+            // 显示
+            $this->assign('userinfo', $uinfo);
+            $this->display();
+        }
+    }
+
+    /*
+     * 处理更新的账户信息
+     * @param $auid -- 管理员账户ID
+     */
+    protected function doProfile($auid) {
+        $email = I('email');
+        $mobile = I('mobile');
+        //$security = I('security');
+
+        $data['auid'] = $auid;
+        $data['email'] = $email;
+        $data['mobile'] = $mobile;
+        //$data['security'] = $security;
+
+        $db = M('admin');
+        $db->save($data);
+
+        $this->redirect('profile');
+    }
 }

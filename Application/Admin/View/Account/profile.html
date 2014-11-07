@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>个人信息修改</title>
+  </head>
+  <body>
+    <form action="{:U('Account/profile')}" method="post">
+      <div>
+        <p><span>用户ID:</span><span>{$userinfo.auid}</span>
+        <p><span>用户名:</span><span>{$userinfo.username}</span>
+      </div>
+      <input type="email" name="email" value="{$userinfo.email}"/><br />
+      <input type="text" name="mobile" value="{$userinfo.mobile}" /><br />
+      <!--
+      <input type="text" name="security" placeholder="密保问题" /><br />
+      -->
+      <input type="submit" value="修改" /><br />
+    </form>
+  </body>
+</html>
