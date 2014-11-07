@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>密码修改</title>
+  </head>
+  <body>
+    <form action="{:U('Account/passwd')}" method="post">
+      <input type="password" name="old_pwd" placeholder="旧密码" /><br />
+      <input type="password" name="security" placeholder="密保口令" /><br />
+      <input type="password" name="new_pwd" placeholder="新密码" /><br />
+      <input type="password" name="new_pwd2" placeholder="重复新密码" /><br />
+      <input type="submit" value="修改" /><br />
+    </form>
+  </body>
+</html>

@@ -64,4 +64,56 @@ class AccountController extends \Think\Controller {
             $this->redirect('login');
         }
     }
+
+    /*
+     * 修改密码操作
+     */
+    public function passwd() {
+        // 登录用户才能执行此项操作
+        $auid = check_login();
+        if (!$auid) {
+            $this->redirect('login');
+        }
+        // 处理表单, 使用doPasswd方法
+        if (IS_POST) {
+            $this->doPasswd($auid);
+        } else {
+            $this->display();
+        }
+    }
+
+    /*
+     * 处理修改密码请求
+     * @param $auid 用户ID
+     */
+    protected function doPasswd($auid) {
+        $old_pwd = I('old_pwd');
+        $security = I('security');
+        $new_pwd = I('new_pwd');
+        $new_pwd2 = I('new_pwd2');
+
+        if ($new_pwd != $new_pwd2) {
+            $this->error('新密码不匹配');
+        }
+        
+        $db = M('admin');
+        $fields = array('password');
+        $where['auid'] = $auid;
+        $where['password'] = md5($old_pwd);
+        $where['security'] = md5($security);
+        $uinfo = $db->where($where)->find();
+
+        if ($uinfo) {
+            // 密码正确, 可以修改
+            $data['auid'] = $auid;
+            $data['password'] = md5($new_pwd);
+            $db->save($data);
+
+            // 返回首页
+            $this->success('操作成功', U('Index/index'));
+        } else {
+            $this->error('原始密码或者密保错误');
+        }
+    }
+
 }
