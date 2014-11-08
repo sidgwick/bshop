@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>新增角色(用户组)</title>
+  </head>
+  <body>
+    <form action="{:U('Rbac/newRole')}" method="post">
+      <label>英文标识</label><input type="text" name="name" placeholder="英文标识"/><br />
+      <label>中文标识</label><input type="text" name="remark" placeholder="中文标识"/><br />
+      <label>开启状态</label>
+      <input type="radio" name="status" value="0" checked="checked" /><span>开</span>
+      <input type="radio" name="status" value="1" /><span>关</span> <br />
+      <input type="hidden" name="pid" value="{$pid}" />
+      <input type="submit" value="登录" /><br />
+    </form>
+  </body>
+</html>
