@@ -20,8 +20,19 @@
       <h2>用户管理操作</h2>
       <div>
         <ul>
-          <li><a href="{:U('User/new')}">新添用户</a></li>
-          <li><a href="{:U('User/list')}">用户列表</a></li>
+          <li><a href="{:U('User/newUser')}">新添用户</a></li>
+          <li><a href="{:U('User/userList')}">用户列表</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h2>RBAC控制</h2>
+      <div>
+        <ul>
+          <li><a href="{:U('Rbac/roleList')}">角色列表</a></li>
+          <li><a href="{:U('Rbac/nodeList')}">结点列表</a></li>
+          <li><a href="{:U('Rbac/newRole')}">新添角色</a></li>
+          <li><a href="{:U('Rbac/newNode')}">新添结点</a></li>
         </ul>
       </div>
     </div>
@@ -29,8 +40,8 @@
       <h2>图书管理操作</h2>
       <div>
         <ul>
-          <li><a href="{:U('Book/new')}">新加图书</a></li>
-          <li><a href="{:U('Book/list')}">图书列表</a></li>
+          <li><a href="{:U('Book/newBook')}">新加图书</a></li>
+          <li><a href="{:U('Book/bookList')}">图书列表</a></li>
         </ul>
       </div>
     </div>
@@ -38,7 +49,7 @@
       <h2>订单管理操作</h2>
       <div>
         <ul>
-          <li><a href="{:U('Order/list')}">订单列表</a></li>
+          <li><a href="{:U('Order/orderList')}">订单列表</a></li>
         </ul>
       </div>
     </div>
@@ -46,7 +57,7 @@
       <h2>评论管理操作</h2>
       <div>
         <ul>
-          <li><a href="{:U('Review/list')}">评论列表</a></li>
+          <li><a href="{:U('Review/reviewList')}">评论列表</a></li>
         </ul>
       </div>
     </div>

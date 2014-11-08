@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>新增用户</title>
+  </head>
+  <body>
+    <form action="{:U('User/newuser')}" method="post">
+      <input type="text" name="username" placeholder="用户名" /><br />
+      <input type="password" name="pwd" placeholder="密码" /><br />
+      <input type="password" name="pwd2" placeholder="重复密码" /><br />
+      <input type="email" name="email" placeholder="电子邮件" /><br />
+      <input type="text" name="mobile" placeholder="手机号码" /><br />
+      <input type="text" name="security" placeholder="密保问题" /><br />
+      <input type="text" name="role" placeholder="角色" /><br />
+      <input type="submit" value="登录" /><br />
+    </form>
+  </body>
+</html>
