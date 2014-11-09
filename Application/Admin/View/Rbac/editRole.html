@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>更改角色(用户组)</title>
+  </head>
+  <body>
+    <h2>当前角色信息如下</h2>
+    <form action="{:U('Rbac/editRole')}" method="post">
+      <label>英文标识</label><input type="text" name="name" value="{$role.name}" placeholder="英文标识"/><br />
+      <label>中文标识</label><input type="text" name="remark" value="{$role.remark}" placeholder="中文标识"/><br />
+      <label>开启状态</label>
+      <if condition="$role.status eq 0">
+      <input type="radio" name="status" value="0" checked="checked" /><span>开</span>
+      <input type="radio" name="status" value="1" /><span>关</span> <br />
+      <else/>
+      <input type="radio" name="status" value="0" /><span>开</span>
+      <input type="radio" name="status" value="1" checked="checked"/><span>关</span> <br />
+      </if>
+      <label>父角色ID</label><input type="text" name="pid" value="{$role.pid}" placeholder="父角色ID"/><br />
+      <input type="hidden" name="id" value="{$role.id}" /><br />
+      <input type="submit" value="更新" /><br />
+    </form>
+  </body>
+</html>

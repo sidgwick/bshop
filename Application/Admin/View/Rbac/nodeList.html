@@ -5,29 +5,45 @@
   </head>
   <body>
     <div>
-      <a href="{:U('Rbac/newNode')}">新添结点</a>
+      <a href="{:U('Rbac/newNode', array('pid' => 0, 'level' => 1))}">新添应用结点</a>
       <table border="1" cellspacing="0" cellpadding="2">
         <tr>
-          <th>用户编号</th>
-          <th>用户名称</th>
-          <th>电子邮件</th>
-          <th>手机</th>
-          <th>上次登录IP</th>
-          <th>上次登录时间</th>
-          <th>角色</th>
+          <th>结点编号</th>
+          <th>结点名称</th>
+          <th>中文标识</th>
+          <th>排序</th>
+          <th>详细描述</th>
+          <th>父级元素</th>
+          <th>结点层次</th>
           <th>当前状态</th>
+          <th>操作</th>
         </tr>
-        <foreach name="ulist" item="u">
+        <foreach name="node_list" item="u">
         <tr>
-          <td>{$u.auid}</td>
-          <td>{$u.username}</td>
-          <td>{$u.email}</td>
-          <td>{$u.mobile}</td>
-          <td>{$u.last_login_ip}</td>
-          <td>{$u.last_login_time|date="Y-m-d H:i:s", ###}</td>
-          <td>{$u.role|get_role_remark}</td>
-          <td>{$u.status}</td>
-          {/* <td>$u.status|get_status_remark</td> */}
+          <td>{$u.id}</td>
+          <td>{$u.name}</td>
+          <td>{$u.title}</td>
+          <td>{$u.sort}</td>
+          <td>{$u.remark}</td>
+          <td>{$u.pid|get_node_name=###, $node_list}</td>
+          <td>
+            <switch name="u.level">
+            <case value="1">应用结点</case>
+            <case value="2">控制器结点</case>
+            <case value="3">方法结点</case>
+            </switch>
+          </td>
+          <td>
+            <if condition="$u['status'] eq 0">
+            开启
+            <else />
+            关闭
+            </if>
+          </td>
+          <td>
+            <span><a href="{:U('Rbac/newNode' , array('pid' => $u['id'], 'level' => $u['level'] + 1))}">新加子级结点</a></span>
+            <span><a href="{:U('Rbac/editNode' , array('id' => $u['id']))}">修改结点</a></span>
+          </td>
         </tr>
         </foreach>
       </table>

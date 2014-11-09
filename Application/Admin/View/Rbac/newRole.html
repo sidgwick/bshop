@@ -5,13 +5,14 @@
   </head>
   <body>
     <form action="{:U('Rbac/newRole')}" method="post">
+      <label>新加角色的父级角色ID为</label> <span>{$pid}</span><br />
       <label>英文标识</label><input type="text" name="name" placeholder="英文标识"/><br />
       <label>中文标识</label><input type="text" name="remark" placeholder="中文标识"/><br />
       <label>开启状态</label>
       <input type="radio" name="status" value="0" checked="checked" /><span>开</span>
       <input type="radio" name="status" value="1" /><span>关</span> <br />
-      <input type="hidden" name="pid" value="{$pid}" />
-      <input type="submit" value="登录" /><br />
+      <input type="hidden" name="pid" value="{$pid}" /><br />
+      <input type="submit" value="新加角色" /><br />
     </form>
   </body>
 </html>

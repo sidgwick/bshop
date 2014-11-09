@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>修改结点</title>
+  </head>
+  <body>
+    <form action="{:U('Rbac/editNode')}" method="post">
+      <label>英文标识</label><input type="text" name="name" value="{$node.name}" placeholder="英文标识"/><br />
+      <label>中文标识</label><input type="text" name="title" value="{$node.title}" placeholder="中文标识"/><br />
+      <label>开启状态</label>
+      <input type="radio" name="status" value="0" checked="checked" /><span>开</span>
+      <input type="radio" name="status" value="1" /><span>关</span> <br />
+      <label>详细描述</label><textarea name="remark">{$node.remark}</textarea><br />
+      <label>排序方式</label><input type="number" name="sort" value="{$node.sort}" placeholder="排序方式"/><br />
+      <label>父级ID</label><input type="number" name="pid" value="{$node.pid}" /><br />
+      <label>结点层次</label><input type="number" name="level" value="{$node.level}" /><br />
+      <input type="hidden" name="id" value="{$node.id}" />
+      <input type="submit" value="登录" /><br />
+    </form>
+  </body>
+</html>

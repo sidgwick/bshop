@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>用户组权限配置</title>
+  </head>
+  <body>
+    <div>
+      <h1>配置{$rid|get_role_name}权限</h1>
+      <form method="post" action="U('Rbac/roleAccess')">
+      <table border="1" cellspacing="0" cellpadding="2">
+        <tr>
+          <th>结点编号</th>
+          <th>结点名称</th>
+          <th>中文标识</th>
+          <th>允许访问</th>
+        </tr>
+        <foreach name="node_list" item="u">
+        <tr>
+          <td>{$u.id}</td>
+          <td>{$u.name}</td>
+          <td>{$u.title}</td>
+          <td>
+            <if condition="rbac_authority_on($u['id'], $role_access)">
+            <input type="checkbox" checked="checked" name="access[]" value="{$u.id}_{$u.level}" />
+            <else/>
+            <input type="checkbox" name="access[]" value="{$u.id}_{$u.level}" />
+            </if>
+          </td>
+        </tr>
+        </foreach>
+      </table>
+      <input type="hidden" name="role_id" value="{$rid}" />
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+  </body>
+</html>
