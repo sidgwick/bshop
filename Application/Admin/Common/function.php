@@ -1,4 +1,18 @@
 <?php
+/**
+ * 检测登录函数
+ * @return mixed AUID-成功/false-失败
+ */
+function check_login() {
+    $uid = session('auid');
+
+    if ($uid) {
+        return $uid;
+    } else {
+        return false;
+    }
+}
+
 /*
  * 获取Role ID对应的中文标识
  * @param array $role_list 保存role的数组

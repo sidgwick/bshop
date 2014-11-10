@@ -13,6 +13,11 @@ class UserController extends AdminController {
         if (IS_POST) {
             $this->doNewUser();
         } else {
+            // 取出来管理员数据
+            $db = M('role');
+            $role = $db->field(array('id', 'name', 'remark'))->where(array('status' => 1))->select();
+
+            $this->assign('role', $role);
             $this->display();
         }
     }
@@ -28,10 +33,12 @@ class UserController extends AdminController {
         $d['email'] = I('email');
         $d['mobile'] = I('mobile');
         $d['security'] = md5(I('security'));
-        $d['role'] = I('role');
-        $d['status'] = 0;
+        $d['status'] = 1;
         $d['last_login_ip'] = get_client_ip();
         $d['last_login_time'] = time();
+
+        // 角色处理
+        $role = I('role');
 
         if ($re_password != $d['password']) {
             $this->error('两次密码不匹配');
@@ -45,20 +52,29 @@ class UserController extends AdminController {
             array('username', '', '用户名称已经存在', $db::MUST_VALIDATE, 'unique', 1),
             array('email', 'email', '电子邮件不对', $db::MUST_VALIDATE),
             array('mobile', '/\d{11}/', '手机号码错误', $db::MUST_VALIDATE),
-            array('role', '/\d{1,2}/', '角色值不对', $db::MUST_VALIDATE),
         );
 
         if (!$db->validate($validate)->create($d)) {
             // 数据验证未能通过
             $this->error($db->getError());
-            // 下一行这个exit是不需要的, TP框架会终止脚本执行
-            // exit();
         }
         
-        // 数据合法, 可以插入
+        // 数据合法, 可以插入, 返回插入的UID
         $uid = $db->add();
 
         if ($uid) {
+            // 确保在用户添加成功之后,再添加相应的角色信息
+            $rdb = M('role_user');
+            $rul = array();
+            foreach ($role as $item) {
+                $tmp['role_id'] = $item['id'];
+                $tmp['user_id'] = $uid;
+
+                $rul[] = $tmp;
+            }
+            // 写入角色信息
+            $num_role = $rdb->addAll($rul);
+
             $this->success("添加成功, 新用户的ID为: $uid", U('Index/index'));
         } else {
             $this->error("添加失败");
@@ -69,8 +85,8 @@ class UserController extends AdminController {
      * 显示用户列表
      */
     public function userList() {
-        $db = M('admin');
-        $ulist = $db->select();
+        $db = D('UserRelation');
+        $ulist = $db->relation(true)->select();
 
         $this->ulist = $ulist;
         $this->display();

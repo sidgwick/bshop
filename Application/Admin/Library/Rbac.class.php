@@ -1,77 +1,26 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2009 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
-namespace Org\Util;
-use Think\Db;
-/**
- +------------------------------------------------------------------------------
- * 基于角色的数据库方式验证类
- +------------------------------------------------------------------------------
- */
-// 配置文件增加设置
-// USER_AUTH_ON 是否需要认证
-// USER_AUTH_TYPE 认证类型
-// USER_AUTH_KEY 认证识别号
-// REQUIRE_AUTH_MODULE  需要认证模块
-// NOT_AUTH_MODULE 无需认证模块
-// USER_AUTH_GATEWAY 认证网关
-// RBAC_DB_DSN  数据库连接DSN
-// RBAC_ROLE_TABLE 角色表名称
-// RBAC_USER_TABLE 用户表名称
-// RBAC_ACCESS_TABLE 权限表名称
-// RBAC_NODE_TABLE 节点表名称
 /*
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `think_access` (
-  `role_id` smallint(6) unsigned NOT NULL,
-  `node_id` smallint(6) unsigned NOT NULL,
-  `level` tinyint(1) NOT NULL,
-  `module` varchar(50) DEFAULT NULL,
-  KEY `groupId` (`role_id`),
-  KEY `nodeId` (`node_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+ * 原来的RBAC把父角色的权限都给了子角色
+ * 这个是修改版本, 把父角色和子角色的权限不再关联.
+ */
 
-CREATE TABLE IF NOT EXISTS `think_node` (
-  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `title` varchar(50) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT '0',
-  `remark` varchar(255) DEFAULT NULL,
-  `sort` smallint(6) unsigned DEFAULT NULL,
-  `pid` smallint(6) unsigned NOT NULL,
-  `level` tinyint(1) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `level` (`level`),
-  KEY `pid` (`pid`),
-  KEY `status` (`status`),
-  KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+namespace Admin\Library;
+use Think\Db;
+/*
+ * 配置文件增加设置
+ * USER_AUTH_ON 是否需要认证
+ * USER_AUTH_TYPE 认证类型
+ * USER_AUTH_KEY 认证识别号
+ * REQUIRE_AUTH_MODULE  需要认证模块
+ * NOT_AUTH_MODULE 无需认证模块
+ * USER_AUTH_GATEWAY 认证网关
+ * RBAC_DB_DSN  数据库连接DSN
+ * RBAC_ROLE_TABLE 角色表名称
+ * RBAC_USER_TABLE 用户表名称
+ * RBAC_ACCESS_TABLE 权限表名称
+ * RBAC_NODE_TABLE 节点表名称
+ */
 
-CREATE TABLE IF NOT EXISTS `think_role` (
-  `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `pid` smallint(6) DEFAULT NULL,
-  `status` tinyint(1) unsigned DEFAULT NULL,
-  `remark` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pid` (`pid`),
-  KEY `status` (`status`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
-
-CREATE TABLE IF NOT EXISTS `think_role_user` (
-  `role_id` mediumint(9) unsigned DEFAULT NULL,
-  `user_id` char(32) DEFAULT NULL,
-  KEY `group_id` (`role_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-*/
 class Rbac {
     // 认证方法
     static public function authenticate($map,$model='') {
@@ -207,7 +156,7 @@ class Rbac {
                     $table['user']." as user,".
                     $table['access']." as access ,".
                     $table['node']." as node ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and access.node_id=node.id and node.level=1 and node.status=1";
+                    "where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and role.status=1 and access.node_id=node.id and node.level=1 and node.status=1";
         $apps =   $db->query($sql);
         $access =  array();
         foreach($apps as $key=>$app) {
@@ -220,7 +169,7 @@ class Rbac {
                     $table['user']." as user,".
                     $table['access']." as access ,".
                     $table['node']." as node ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and access.node_id=node.id and node.level=2 and node.pid={$appId} and node.status=1";
+                    "where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and role.status=1 and access.node_id=node.id and node.level=2 and node.pid={$appId} and node.status=1";
             $modules =   $db->query($sql);
             // 判断是否存在公共模块的权限
             $publicAction  = array();
@@ -233,7 +182,7 @@ class Rbac {
                     $table['user']." as user,".
                     $table['access']." as access ,".
                     $table['node']." as node ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and access.node_id=node.id and node.level=3 and node.pid={$moduleId} and node.status=1";
+                    "where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and role.status=1 and access.node_id=node.id and node.level=3 and node.pid={$moduleId} and node.status=1";
                     $rs =   $db->query($sql);
                     foreach ($rs as $a){
                         $publicAction[$a['name']]	 =	 $a['id'];
@@ -251,7 +200,7 @@ class Rbac {
                     $table['user']." as user,".
                     $table['access']." as access ,".
                     $table['node']." as node ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and access.node_id=node.id and node.level=3 and node.pid={$moduleId} and node.status=1";
+                    "where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and role.status=1 and access.node_id=node.id and node.level=3 and node.pid={$moduleId} and node.status=1";
                 $rs =   $db->query($sql);
                 $action = array();
                 foreach ($rs as $a){
@@ -274,7 +223,7 @@ class Rbac {
                     $table['role']." as role,".
                     $table['user']." as user,".
                     $table['access']." as access ".
-                    "where user.user_id='{$authId}' and user.role_id=role.id and ( access.role_id=role.id  or (access.role_id=role.pid and role.pid!=0 ) ) and role.status=1 and  access.module='{$module}' and access.status=1";
+                    "where user.user_id='{$authId}' and user.role_id=role.id and access.role_id=role.id and role.status=1 and  access.module='{$module}' and access.status=1";
         $rs =   $db->query($sql);
         $access	=	array();
         foreach ($rs as $node){

@@ -12,17 +12,17 @@ class AdminController extends Controller {
         if (!$uid) {
             $this->redirect('Account/login');
         }
-
-        $this->uinfo = session('userinfo');
-
         // 已经登录的用户,可以继续其他操作
+        // RBAC 控制检测访问权限
+        $rbac = new \Admin\Library\Rbac();
+        $auth = $rbac::AccessDecision();
+        
+        if (!$auth) {
+            $this->error('没有访问权限');
+        }
     }
 
     public function __get($key) {
-        if (isset($this->uinfo["$key"])) {
-            return $this->uinfo["$key"];
-        } else {
-            return NULL;
-        }
+        return session($key);
     }
 }

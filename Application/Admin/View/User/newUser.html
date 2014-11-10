@@ -5,13 +5,17 @@
   </head>
   <body>
     <form action="{:U('User/newuser')}" method="post">
-      <input type="text" name="username" placeholder="用户名" /><br />
-      <input type="password" name="pwd" placeholder="密码" /><br />
-      <input type="password" name="pwd2" placeholder="重复密码" /><br />
-      <input type="email" name="email" placeholder="电子邮件" /><br />
-      <input type="text" name="mobile" placeholder="手机号码" /><br />
-      <input type="text" name="security" placeholder="密保问题" /><br />
-      <input type="text" name="role" placeholder="角色" /><br />
+      <label>用户名称</label><input type="text" name="username" placeholder="用户名" /><br />
+      <label>登录密码</label><input type="password" name="pwd" placeholder="密码" /><br />
+      <label>重复密码</label><input type="password" name="pwd2" placeholder="重复密码" /><br />
+      <label>电子邮件</label><input type="email" name="email" placeholder="电子邮件" /><br />
+      <label>手机号码</label><input type="text" name="mobile" placeholder="手机号码" /><br />
+      <label>密保问题</label><input type="text" name="security" placeholder="密保问题" /><br />
+      <label>选择角色</label>
+      <foreach name="role" item="r">
+      <input type="checkbox" name="role[]" value="{$r['id']}" />{$r['name']}({$r.remark})
+      </foreach>
+      <br />
       <input type="submit" value="登录" /><br />
     </form>
   </body>

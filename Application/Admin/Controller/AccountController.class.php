@@ -32,14 +32,28 @@ class AccountController extends \Think\Controller {
         $uinfo = $db->where($g)->field($fields)->find();
 
         if ($uinfo) {
-            if ($uinfo['status'] == 0) {
+            if ($uinfo['status'] == 1) {
                 // 登录成功, 将当前IP和时间信息记录到数据库
                 $data['auid'] = $uinfo['auid'];
                 $data['last_login_ip'] = get_client_ip();
                 $data['last_login_time'] = time();
                 $db->save($data);
 
-                session('userinfo', $uinfo);
+                session('auid', $uinfo['auid']);
+                session('username', $uinfo['username']);
+                session('last_login_ip', $uinfo['last_login_ip']);
+                session('last_login_time', $uinfo['last_login_time']);
+                session('status', $uinfo['status']);
+
+                // 根管理员用户不需RBAC验证
+                if (C('RBAC_SUPERADMIN') == $uinfo['username']) {
+                    session(C('ADMIN_AUTH_KEY'), true);
+                }
+
+                // 把RBAC的信息添加到session里面
+                $rbac = new \Admin\Library\Rbac();
+                $rbac::saveAccessList();
+
                 $this->redirect('Index/index');
             } else {
                 // 到这里, 说明此用户被禁用了
@@ -130,9 +144,9 @@ class AccountController extends \Think\Controller {
             $this->doProfile($auid);
         } else {
             // 取出用户原始信息
-            $db = M('admin');
+            $db = D('UserRelation');
             $where['auid'] = $auid;
-            $uinfo = $db->where($where)->find();
+            $uinfo = $db->relation(true)->where($where)->find();
 
             // 显示
             $this->assign('userinfo', $uinfo);

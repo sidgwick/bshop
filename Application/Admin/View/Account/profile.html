@@ -8,6 +8,11 @@
       <div>
         <p><span>用户ID:</span><span>{$userinfo.auid}</span>
         <p><span>用户名:</span><span>{$userinfo.username}</span>
+        <p><span>角色组:</span><span>
+          <foreach name="userinfo.role" item="role">
+          {$role['remark']}
+          </foreach>
+        </span>
       </div>
       <input type="email" name="email" value="{$userinfo.email}"/><br />
       <input type="text" name="mobile" value="{$userinfo.mobile}" /><br />
