@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>新增图书</title>
+    <script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.all.js"></script>
+  </head>
+  <body>
+    <h1>新上架图书</h1>
+    <form action="{:U('Book/newBook')}" method="post" enctype="multipart/form-data">
+      <label>名称</label><input type="text" name="title" placeholder="图书名称" /><br />
+      <label>外文名称</label><input type="text" name="title_en" placeholder="外文名称" /><br />
+      <label>作者</label><input type="text" name="author" placeholder="作者" /><br />
+      <label>作者国籍</label>
+      <select name="nationality">
+        <foreach name="country_list" item="nation">
+        <option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option>
+        </foreach>
+      </select><br />
+      <label>译者</label><input type="text" name="translator" placeholder="译者" /><br />
+      <label>出版社</label><input type="text" name="publisher" placeholder="出版社" /><br />
+      <label>ISBN</label><input type="text" name="isbn" placeholder="ISBN" /><br />
+      <label>图书封面</label><input type="file" name="cover" /><br />
+      <label>图书介绍</label>
+      <!-- 加载Ueditor编辑器 -->
+      <script id="container" name="description" type="text/plain"></script>
+      <script type="text/javascript"> var ue = UE.getEditor('container'); </script>
+      <input type="submit" value="添加图书" /><br />
+    </form>
+  </body>
+</html>

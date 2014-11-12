@@ -31,7 +31,11 @@
             <span><a href="{:U('Rbac/newRole' , array('pid' => $u['id']))}">新加子级角色</a></span>
             <span><a href="{:U('Rbac/editRole' , array('id' => $u['id']))}">修改角色状态</a></span>
             <span><a href="{:U('Rbac/deleteRole' , array('id' => $u['id']))}">删除该角色</a></span>
+            <if condition="$u['pid'] == 0">
+            <span>此角色最高权限</span>
+            <else/>
             <span><a href="{:U('Rbac/roleAccess' , array('id' => $u['id']))}">配置角色权限</a></span>
+            </if>
           </td>
         </tr>
         </foreach>
