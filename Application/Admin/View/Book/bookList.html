@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>当前图书列表</title>
+  </head>
+  <body>
+    <div>
+      <table border="1" cellspacing="0" cellpadding="2">
+        <tr>
+          <th>书名</th>
+          <th>外文名称</th>
+          <th>作者</th>
+          <th>译者</th>
+          <th>出版社</th>
+          <th>ISBN</th>
+        </tr>
+        <foreach name="book_list" item="bl">
+        <tr>
+          <td><a href="{:U('Book/bookDetail', array('bid' => $bl['bid']))}">{$bl.title}</a></td>
+          <td>{$bl.title_en}</td>
+          <foreach name="bl.author" item="a">
+          <if condition="$a['author_role'] == 1">
+          <td>[{$a.nation_remark}]{$a.author_name}</td>
+          </if>
+          </foreach>
+          <foreach name="bl.author" item="a">
+          <if condition="$a['author_role'] == 2">
+          <td>[{$a.nation_remark}]{$a.author_name}</td>
+          </if>
+          </foreach>
+          <td>{$bl.publisher}</td>
+          <td>{$bl.isbn}</td>
+        </tr>
+        </foreach>
+      </table>
+    </div>
+  </body>
+</html>

@@ -48,9 +48,13 @@ class BookController extends AdminController {
         $translator['role'] = 2;
         $aid = $this->doNewBookAuthorTable($translator, $bid);
 
+        // TODO 这里还有类目咩有
+
         // 保存图片到/Public/Cover/目录
         // TODO: 将来搞成循环, 以支持多图片
         $this->doNewBookUpload($bid);
+
+        $this->success('新加图书完成');
     }
     
     /*
@@ -168,6 +172,37 @@ class BookController extends AdminController {
         $r['book_id'] = $bid;
         $r['author_id'] = $aid;
         $radb->add($r);
+    }
+
+    /*
+     * 显示图书列表
+     */
+    public function bookList() {
+        $bdb = D('BookView');
+        $bdb->field('bid,title,title_en,publisher,isbn,author_id,author_name,author_role,nation_name,nation_name,nation_remark,nation_id');
+        $book_list = $bdb->relationSelect();
+
+        $this->assign('book_list', $book_list);
+        $this->display();
+    }
+    
+    /*
+     * 显示图书详细信息
+     */
+    public function bookDetail() {
+        $bid = I('bid');
+        if (!$bid) {
+            $this->error("数据错误!!!");
+        }
+
+        $bdb = D('BookView');
+        $book = $bdb->where(array('bid' => $bid))->relationFind();
+
+        $cover = get_cover_img($bid);
+
+        $this->assign('b', $book);
+        $this->assign('cover_list', $cover);
+        $this->display();
     }
 }
 ?>

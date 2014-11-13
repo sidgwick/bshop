@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>图书详细信息</title>
+  </head>
+  <body>
+    <h1>图书详细信息</h1>
+    <div>
+      <div>
+        <h3>书名:{$b.title}</h3>
+        <span>英文名:{$b.title_en}</span>
+        <span>作者:
+          <foreach name="b.author" item="a">
+          <if condition="$a['author_role'] == 1">
+          [{$a.nation_remark}]{$a.author_name}
+          </if>
+          </foreach>
+        </span>
+        <span>译者:
+          <foreach name="b.author" item="a">
+          <if condition="$a['author_role'] == 2">
+          [{$a.nation_remark}]{$a.author_name}
+          </if>
+          </foreach>
+        </span>
+        <span>出版社:{$b.publisher}</span>
+        <span>ISBN:{$b.isbn}</span>
+        <span>封面图片:
+          <foreach name="cover_list" item="cover">
+          <img src="__PUBLIC__/Book_img/{$b.bid}/{$cover.name}" />
+          </foreach>
+        </span>
+      </div>
+      <div>
+        <h5>详细介绍</h5>
+        <p>{$b.description|htmlspecialchars_decode}</p>
+      </div>
+    </div>
+  </body>
+</html>
