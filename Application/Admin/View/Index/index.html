@@ -1,64 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>BShop后台首页</title>
-  </head>
-  <body>
-    <div>
-      <p>你最近登录的IP为: <span>{$last_login_ip}</span></p>
-      <p>你最近登录的时间为: <span>{$last_login_time|date='Y-m-d H:i:s', ###}</span></p>
-      <p>
-      <h4>账户管理操作:</h4>
-        <ul>
-          <li><a href="{:U('Account/logout')}">登出</a></li>
-          <li><a href="{:U('Account/passwd')}">修改密码</a></li>
-          <li><a href="{:U('Account/profile')}">修改个人信息</a></li>
-        </ul>
-      </p>
-    </div>
-    <div>
-      <h2>用户管理操作</h2>
-      <div>
-        <ul>
-          <li><a href="{:U('User/newUser')}">新添用户</a></li>
-          <li><a href="{:U('User/userList')}">用户列表</a></li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <h2>RBAC控制</h2>
-      <div>
-        <ul>
-          <li><a href="{:U('Rbac/roleList')}">角色列表</a></li>
-          <li><a href="{:U('Rbac/nodeList')}">结点列表</a></li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <h2>图书管理操作</h2>
-      <div>
-        <ul>
-          <li><a href="{:U('Book/newBook')}">新加图书</a></li>
-          <li><a href="{:U('Book/bookList')}">图书列表</a></li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <h2>订单管理操作</h2>
-      <div>
-        <ul>
-          <li><a href="{:U('Order/orderList')}">订单列表</a></li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <h2>评论管理操作</h2>
-      <div>
-        <ul>
-          <li><a href="{:U('Review/reviewList')}">评论列表</a></li>
-        </ul>
-      </div>
-    </div>
-  </body>
-</html>
+<include file="common:header" />
+    <title>后台管理首页</title>
+<include file="common:top" />
 
+    <div class="container-fluid">
+      <div class="row">
+<include file="common:left" />
+        <div class="col-sm-9 col-md-10 main">
+          <div class="alert alert-success" role="alert">
+            <strong>登录成功</strong> <br /><br /><br />
+            <div class="alert alert-info" role="alert">
+              <strong>上次登录信息</strong><br /> Time: {$last_login_time|date="Y-m-d H:i:s", ###} <br /> IP: {$last_login_ip}
+            </div>
+          </div>      
+        </div>
+
+      </div>
+    </div>
+<include file="common:footer" />

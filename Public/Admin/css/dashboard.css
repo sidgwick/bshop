@@ -1,0 +1,49 @@
+/*
+ * Top navigation
+ */
+.navbar {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.navbar-brand img {
+    height: 100%;
+}
+
+@media(min-width: 760px) {
+    .left-side {
+        border-right: 2px solid #666666;
+    }
+}
+
+.left-side dl dt {
+    font-size: 1.3em;
+    padding: 10px 15px;
+}
+
+.left-side dl dd {
+    font-size: 0.9em;
+    padding: 8px 20px;
+}
+
+.left-side dl dd a{
+    text-decoration: none;
+}
+
+.main {
+    padding: 20px;
+}
+
+/*
+ * Footer
+ */
+footer.footer {
+    padding: 22px 0;
+    color: #999;
+    text-align: center;
+    background-color: #222222;
+    border-top: 2px solid #e5e5e5;
+    bottom: 0;
+}
+

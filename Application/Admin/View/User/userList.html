@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>用户列表</title>
-  </head>
-  <body>
-    <div>
-      <table border="1" cellspacing="0" cellpadding="2">
+<include file="common:header" />
+<title>用户列表</title>
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+
+      <table class="table table-striped">
         <tr>
           <th>用户编号</th>
           <th>用户名称</th>
@@ -30,7 +32,7 @@
             </foreach>
           </td>
           <td>
-          <if condition="$u['status'] eq 1">
+            <if condition="$u['status'] eq 1">
             开启
             <else />
             关闭
@@ -39,6 +41,9 @@
         </tr>
         </foreach>
       </table>
+      {$pages}
     </div>
-  </body>
-</html>
+
+  </div>
+</div>
+<include file="common:footer" />

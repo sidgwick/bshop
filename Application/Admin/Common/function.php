@@ -69,4 +69,28 @@ function rbac_authority_on($node_id, $access) {
     return false;
 }
 
+/*
+ * 归并list结果集, 适用于有ID, 父ID的结果集
+ * @param array $list 传入数据库模型返回的数据集
+ * @param integer $pid 当前元素的pid
+ * @return array 返回归并好的三维(应用 - 控制器 - 方法)数组
+ */
+
+function list_merge($list, $pid = 0) {
+    $tmp = array();
+    $i = 0;
+    foreach ($list as $item) {
+        if ($item['pid'] == $pid) {
+            $tmp[$i] = $item;
+            $child = list_merge($list, $item['id']);
+            if (count($child)) {
+                $tmp[$i]['child'] = list_merge($list, $item['id']);
+            }
+            $i++;
+        }
+    }
+
+    return $tmp;
+}
+
 ?>

@@ -1,0 +1,39 @@
+<include file="common:header" />
+<link href="__CSS__/newUser.css" rel="stylesheet">
+<title>{$role.remark}角色</title>
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+        <h2>RBAC角色信息({$role.remark})</h2>
+        
+        <dl class="dl-horizontal">
+        <dt>角色ID</dt><dd>{$role.id}</dd>
+        <dt>父角色</dt><dd>{$role.pid|get_role_name}</dd>
+        <dt>父角色ID</dt><dd>{$role.pid}</dd>
+        <dt>英文标识</dt><dd>{$role.name}</dd>
+        <dt>中文标识</dt><dd>{$role.remark}</dd>
+        <if condition="$role.status eq 0">
+          <dt>开启状态</dt><dd>关</dd>
+        <else/>
+          <dt>开启状态</dt><dd>开</dd>
+        </if>
+        <dt>操作</dt>
+        <dd>
+        <ul class="list-inline">
+        <li><a href="{:U('Rbac/newRole' , array('pid' => $role['id']))}">新加子级角色</a></li>
+        <li><a href="{:U('Rbac/editRole' , array('id' => $role['id']))}">修改角色状态</a></li>
+        <li><a href="{:U('Rbac/deleteRole' , array('id' => $role['id']))}">删除该角色</a></li>
+        <li><if condition="$role['pid'] != 0"><a href="{:U('Rbac/roleAccess' , array('id' => $role['id']))}">配置角色权限</a></if></li>
+        </ul>
+        </dd>
+        </dl>
+
+      
+    </div>
+
+  </div>
+</div>
+<include file="common:footer" />

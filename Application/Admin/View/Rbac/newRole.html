@@ -1,18 +1,51 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>新增角色(用户组)</title>
-  </head>
-  <body>
-    <form action="{:U('Rbac/newRole')}" method="post">
-      <label>新加角色的父级角色ID为</label> <span>{$pid}</span><br />
-      <label>英文标识</label><input type="text" name="name" placeholder="英文标识"/><br />
-      <label>中文标识</label><input type="text" name="remark" placeholder="中文标识"/><br />
-      <label>开启状态</label>
-      <input type="radio" name="status" value="0" checked="checked" /><span>关</span>
-      <input type="radio" name="status" value="1" /><span>开</span> <br />
-      <input type="hidden" name="pid" value="{$pid}" /><br />
-      <input type="submit" value="新加角色" /><br />
-    </form>
-  </body>
-</html>
+<include file="common:header" />
+<link href="__CSS__/newUser.css" rel="stylesheet">
+<title>新增角色(用户组)</title>
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+      <!-- 再次使用栅格系统, 使表单看起来不是太大  -->
+      <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2">
+        <h2>新增角色(用户组)</h2>
+        <form class="form-horizontal" role="form" action="{:U('Rbac/newRole')}" method="post">
+          <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">英文标识</label>
+            <div class="col-sm-8">
+              <input type="text" name="name" placeholder="英文标识" class="form-control" id="inputName" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputRemark" class="col-sm-2 control-label">中文标识</label>
+            <div class="col-sm-8">
+              <input type="text" name="remark" placeholder="中文标识" class="form-control" id="inputRemark" />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="inputStatus" class="col-sm-2 control-label">开启状态</label>
+            <div class="checkbox col-sm-10" id="inputStatus">
+              <input type="radio" name="status" value="0" /><span>关</span>
+              <input type="radio" name="status" value="1" checked="checked"/><span>开</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPid" class="col-sm-2 control-label">父级ID</label>
+            <div class="col-sm-8">
+              <input type="number" name="pid" value="{$pid}" class="form-control" id="inputPid" placeholder="父结点ID" disabled />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <input type="submit" class="btn btn-default" value="新建角色" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+<include file="common:footer" />

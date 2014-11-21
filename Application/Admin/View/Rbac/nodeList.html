@@ -1,52 +1,43 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>结点列表</title>
-  </head>
-  <body>
-    <div>
-      <a href="{:U('Rbac/newNode', array('pid' => 0, 'level' => 1))}">新添应用结点</a>
-      <table border="1" cellspacing="0" cellpadding="2">
-        <tr>
-          <th>结点编号</th>
-          <th>结点名称</th>
-          <th>中文标识</th>
-          <th>排序</th>
-          <th>详细描述</th>
-          <th>父级元素</th>
-          <th>结点层次</th>
-          <th>当前状态</th>
-          <th>操作</th>
-        </tr>
-        <foreach name="node_list" item="u">
-        <tr>
-          <td>{$u.id}</td>
-          <td>{$u.name}</td>
-          <td>{$u.title}</td>
-          <td>{$u.sort}</td>
-          <td>{$u.remark}</td>
-          <td>{$u.pid|get_node_name=###, $node_list}</td>
-          <td>
-            <switch name="u.level">
-            <case value="1">应用结点</case>
-            <case value="2">控制器结点</case>
-            <case value="3">方法结点</case>
-            </switch>
-          </td>
-          <td>
-            <if condition="$u['status'] eq 1">
-            开启
-            <else />
-            关闭
+<include file="common:header" />
+<title>结点列表</title>
+<link rel="stylesheet" href="__CSS__/list.css" />
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+    <p>
+    <a href="{:U('Rbac/newNode', array('pid' => 0, 'level' => 1))}" class="btn btn-default">新添应用结点</a>
+    </p>
+
+<ul class="list-unstyled" id="list">
+  {/* 这一级foreach处理应用结点 */}
+  <foreach name="node_list" item="u">
+    <li><a href="{:U('Rbac/editNode' , array('id' => $u['id']))}" class="app_node">{$u.name}({$u.title})</a> <a class="btn btn-default btn-sm" href="{:U('Rbac/newNode' , array('pid' => $u['id'], 'level' => $u['level'] + 1))}">新加控制器结点</a>
+    {/* 这一级foreach处理控制器结点 */}
+    <if condition="isset($u['child'])">
+      <ul class="list-inline">
+        <foreach name="u.child" item="a">
+          <li><a href="{:U('Rbac/editNode' , array('id' => $a['id']))}" class="controller_node">{$a.name}({$a.title})</a> <a class="btn btn-default btn-xs" href="{:U('Rbac/newNode' , array('pid' => $a['id'], 'level' => $a['level'] + 1))}">新加方法结点</a>
+          {/* 这一级foreach处理方法结点 */}
+          <if condition="isset($a['child'])">
+            <ul class="list-inline">
+              <foreach name="a.child" item="m">
+              <li><a href="{:U('Rbac/editNode' , array('id' => $m['id']))}" class="method_node">{$m.name}({$m.title})</a></li>
+              </foreach>
+            </ul>
             </if>
-          </td>
-          <td>
-            <span><a href="{:U('Rbac/newNode' , array('pid' => $u['id'], 'level' => $u['level'] + 1))}">新加子级结点</a></span>
-            <span><a href="{:U('Rbac/editNode' , array('id' => $u['id']))}">修改结点</a></span>
-          </td>
-        </tr>
+            </li>
         </foreach>
-      </table>
+      </ul>
+      </if>
+      </li>
+  </foreach>
+</ul>
+
     </div>
-  </body>
-</html>
+
+  </div>
+</div>
+<include file="common:footer" />

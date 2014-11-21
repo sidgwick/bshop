@@ -20,6 +20,12 @@
       <label>译者</label><input type="text" name="translator" placeholder="译者" /><br />
       <label>出版社</label><input type="text" name="publisher" placeholder="出版社" /><br />
       <label>ISBN</label><input type="text" name="isbn" placeholder="ISBN" /><br />
+      <label>选择图书分类</label>
+      <select name="category">
+        <foreach name="category_list" item="category">
+        <option value="{$category['id']}">({$category['label']})       {$category['remark']}</option>
+        </foreach>
+      </select><br />
       <label>图书封面</label><input type="file" name="cover" /><br />
       <label>图书介绍</label>
       <!-- 加载Ueditor编辑器 -->

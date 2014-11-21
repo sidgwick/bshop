@@ -86,9 +86,14 @@ class UserController extends AdminController {
      */
     public function userList() {
         $db = D('UserRelation');
-        $ulist = $db->relation(true)->select();
+        $count = $db->relation(true)->count();
+        $page = new \Common\Library\Page($count, 10);
+        $limit = "{$page->firstRow}, {$page->listRows}";
+        
+        $ulist = $db->relation(true)->limit($limit)->select();
 
-        $this->ulist = $ulist;
+        $this->assign('ulist',$ulist);
+        $this->assign('pages', $page->show());
         $this->display();
     }
 }

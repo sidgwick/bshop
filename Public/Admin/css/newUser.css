@@ -1,0 +1,9 @@
+.main h2 {
+    font-size: 1.3em;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+textarea {
+height: 45px;
+}

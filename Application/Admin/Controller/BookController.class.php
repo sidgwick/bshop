@@ -11,6 +11,22 @@ class BookController extends AdminController {
             $this->doNewBook();
         } else {
             $country_list = M('country')->order('name')->select();
+            $category_list = M('category')->order('label')->select();
+
+            $this->assign('country_list', $country_list);
+            $this->assign('category_list', $category_list);
+            $this->display();
+        }
+    }
+
+    /*
+     * 新添加图书
+     */
+    public function editBook() {
+        if (IS_POST) {
+            $this->doNewBook();
+        } else {
+            $country_list = M('country')->order('name')->select();
 
             $this->assign('country_list', $country_list);
             $this->display();
@@ -27,6 +43,7 @@ class BookController extends AdminController {
         $book['title_en'] = I('title_e');
         $book['publisher'] = I('publisher');
         $book['isbn'] = I('isbn');
+        $book['category'] = I('category');
         $book['description'] = I('description');
         
         // 写入数据库(会检测重复)

@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>角色(用户组)列表</title>
-  </head>
-  <body>
-    <div>
-      <table border="1" cellspacing="0" cellpadding="2">
+<include file="common:header" />
+<title>角色(用户组)列表</title>
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+      <table class="table table-striped">
         <tr>
           <th>角色编号</th>
           <th>英文标识</th>
           <th>中文标识</th>
           <th>父级角色</th>
           <th>当前状态</th>
-          <th>操作</th>
         </tr>
         <foreach name="role_list" item="u">
         <tr>
           <td>{$u.id}</td>
-          <td>{$u.name}</td>
+          <td><a href="{:U('Rbac/roleDetail' , array('id' => $u['id']))}">{$u.name}</a></td>
           <td>{$u.remark}</td>
           <td>{$u.pid|get_role_name=###, $role_list}</td>
           <td>
@@ -27,19 +27,12 @@
             关闭
             </if>
           </td>
-          <td>
-            <span><a href="{:U('Rbac/newRole' , array('pid' => $u['id']))}">新加子级角色</a></span>
-            <span><a href="{:U('Rbac/editRole' , array('id' => $u['id']))}">修改角色状态</a></span>
-            <span><a href="{:U('Rbac/deleteRole' , array('id' => $u['id']))}">删除该角色</a></span>
-            <if condition="$u['pid'] == 0">
-            <span>此角色最高权限</span>
-            <else/>
-            <span><a href="{:U('Rbac/roleAccess' , array('id' => $u['id']))}">配置角色权限</a></span>
-            </if>
-          </td>
         </tr>
         </foreach>
       </table>
+      {$pages}
     </div>
-  </body>
-</html>
+
+  </div>
+</div>
+<include file="common:footer" />

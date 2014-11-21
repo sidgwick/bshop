@@ -1,0 +1,44 @@
+
+.app_node {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: red;
+}
+
+.controller_node {
+    font-size: 1.1em;
+    color: green;
+}
+
+.method_node {
+    font-size: 1em;
+    color: blue;
+}
+
+
+.level_1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: red;
+}
+
+.level_2 {
+    font-size: 0.9em;
+    color: green;
+}
+
+.level_3 {
+    font-size: 0.8em;
+    color: blue;
+}
+
+#list li{
+    padding: 5px;
+    margin: 5px;
+}
+
+#list li div{
+    padding: 0;
+    margin: 1px;
+}
+

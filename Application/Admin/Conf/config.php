@@ -15,6 +15,15 @@ return array(
     'RBAC_ACCESS_TABLE' => 'bs_access',
     'RBAC_NODE_TABLE' => 'bs_node',
 
+    /* 模板相关配置 */
+    'TMPL_PARSE_STRING' => array(
+        '__PUB_IMG__'    => __ROOT__ . '/Public/images',
+        '__PUB_CSS__'    => __ROOT__ . '/Public/css',
+        '__PUB_JS__'     => __ROOT__ . '/Public/js',
+        '__IMG__'    => __ROOT__ . '/Public/' . MODULE_NAME . '/images',
+        '__CSS__'    => __ROOT__ . '/Public/' . MODULE_NAME . '/css',
+        '__JS__'     => __ROOT__ . '/Public/' . MODULE_NAME . '/js',
+    ),
 
     'SHOW_PAGE_TRACE' => true,
 );

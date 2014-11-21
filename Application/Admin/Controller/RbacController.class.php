@@ -29,15 +29,34 @@ class RbacController extends AdminController {
             $this->error("新增失败, 错误信息:" . $db->getError());
         }
     }
-    
+
+    /*
+     * 角色详细信息
+     */
+    public function roleDetail() {
+        $id = I('id');
+
+        $db = M('role');
+        $this->role = $db->where(array('id' => $id))->find();
+
+        $this->display();
+    }
+
     /*
      * 角色列表
      */
     public function roleList() {
         $db = M('role');
-        $role_list = $db->select();
 
+        $count = $db->count();
+        $page = new \Common\Library\Page($count, 10);
+        $limit = "{$page->firstRow}, {$page->listRows}";
+
+        $role_list = $db->limit($limit)->select();
+
+        $this->assign('pages', $page->show());
         $this->assign("role_list", $role_list);
+
         $this->display();
     }
 
@@ -70,7 +89,7 @@ class RbacController extends AdminController {
             $this->error("更新失败, 错误信息:" . $db->getError());
         }
     }
-    
+
     /*
      * 配置角色权限
      */
@@ -82,7 +101,8 @@ class RbacController extends AdminController {
             $adb = M('access');
             $role_access = $adb->where(array('role_id' => $rid))->select();
             $ndb = M('node');
-            $node_list = $ndb->field(array('id', 'name', 'title', 'level'))->select();
+            $node_list = $ndb->select();
+            $node_list = list_merge($node_list);
 
             $this->assign('rid', $rid);
             $this->assign('role_access', $role_access);
@@ -155,6 +175,7 @@ class RbacController extends AdminController {
     public function nodeList() {
         $db = M('node');
         $node_list = $db->select();
+        $node_list = list_merge($node_list);
 
         $this->assign('node_list', $node_list);
         $this->display();
@@ -183,11 +204,10 @@ class RbacController extends AdminController {
     private function doEditNode() {
         $db = M('node');
         $result = $db->save(I('post.'));
-
-        if ($result) {
-            $this->success('新增结点成功', U('nodeList'));
+        if ($result !== false) {
+            $this->success('修改结点成功', U('nodeList'));
         } else {
-            $this->error('新增失败, 错误:' . $db->getError());
+            $this->error('修改失败, 错误:' . $db->getError());
         }
     }
 }
