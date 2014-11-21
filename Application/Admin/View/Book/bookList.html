@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>当前图书列表</title>
-  </head>
-  <body>
-    <div>
-      <table border="1" cellspacing="0" cellpadding="2">
+<include file="common:header" />
+<title>图书列表</title>
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+
+      <table class="table table-striped">
         <tr>
           <th>书名</th>
           <th>外文名称</th>
@@ -33,6 +35,9 @@
         </tr>
         </foreach>
       </table>
+      {$pages}
     </div>
-  </body>
-</html>
+
+  </div>
+</div>
+<include file="common:footer" />

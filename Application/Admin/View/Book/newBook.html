@@ -1,37 +1,86 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<include file="common:header" />
+<link href="__CSS__/newBook.css" rel="stylesheet">
     <title>新增图书</title>
     <script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.all.js"></script>
-  </head>
-  <body>
-    <h1>新上架图书</h1>
-    <form action="{:U('Book/newBook')}" method="post" enctype="multipart/form-data">
-      <label>名称</label><input type="text" name="title" placeholder="图书名称" /><br />
-      <label>外文名称</label><input type="text" name="title_en" placeholder="外文名称" /><br />
-      <label>作者</label><input type="text" name="author" placeholder="作者" /><br />
-      <label>作者国籍</label>
-      <select name="nationality">
-        <foreach name="country_list" item="nation">
-        <option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option>
-        </foreach>
-      </select><br />
-      <label>译者</label><input type="text" name="translator" placeholder="译者" /><br />
-      <label>出版社</label><input type="text" name="publisher" placeholder="出版社" /><br />
-      <label>ISBN</label><input type="text" name="isbn" placeholder="ISBN" /><br />
-      <label>选择图书分类</label>
-      <select name="category">
-        <foreach name="category_list" item="category">
-        <option value="{$category['id']}">({$category['label']})       {$category['remark']}</option>
-        </foreach>
-      </select><br />
-      <label>图书封面</label><input type="file" name="cover" /><br />
-      <label>图书介绍</label>
-      <!-- 加载Ueditor编辑器 -->
-      <script id="container" name="description" type="text/plain"></script>
-      <script type="text/javascript"> var ue = UE.getEditor('container'); </script>
-      <input type="submit" value="添加图书" /><br />
-    </form>
-  </body>
-</html>
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+        <h2>新上架图书</h2>
+        <form class="form-horizontal" role="form" action="{:U('Book/newBook')}" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="inputTitle" class="col-md-1 control-label">名称</label>
+            <div class="col-sm-4">
+              <input type="text" name="title" placeholder="图书名称" class="form-control" id="inputTitle" />
+            </div>
+            <label for="inputTitle_en" class="col-md-1 control-label">外文名称</label>
+            <div class="col-sm-4">
+              <input type="text" name="title_en" placeholder="图书外文名称" class="form-control" id="inputTitle_en" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAuthor" class="col-md-1 control-label">作者</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="inputAuthor" name="pwd" placeholder="作者" />
+            </div>
+            <label for="inputAuthorNationality" class="col-md-1 control-label">作者国籍</label>
+            <div class="col-sm-2">
+            <select name="nationality" id="inputAuthorNationality" class="form-control"><foreach name="country_list" item="nation"><option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option></foreach></select>
+            </div>
+            <label for="inputTranslater" class="col-md-1 control-label">译者</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control" id="inputTranslater"  name="translator" placeholder="译者" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputIsbn" class="col-md-1 control-label">ISBN</label>
+            <div class="col-sm-3">
+              <input type="text" name="isbn" placeholder="ISBN" class="form-control" id="inputIsbn" />
+            </div>
+            <label for="inputPublisher" class="col-md-1 control-label">出版社</label>
+            <div class="col-sm-2">
+              <input type="text" name="publisher" placeholder="出版社" class="form-control" id="inputPublisher" />
+            </div>
+            <label for="inputPrice" class="col-md-1 control-label">定价</label>
+            <div class="col-sm-2">
+              <input type="text" name="price" placeholder="定价" class="form-control" id="inputPrice" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputCategory" class="col-md-1 control-label">图书分类</label>
+            <div class="col-sm-4">
+            <select name="category" id="inputCategory" class="form-control"><foreach name="category_list" item="category"><option value="{$category['id']}">({$category['label']})       {$category['remark']}</option></foreach></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputCover" class="col-md-1 control-label">图书封面</label>
+            <div class="col-sm-8">
+              <input type="file"  id="inputCover" name="cover" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDescription" class="col-md-1 control-label">图书介绍</label>
+            <div class="col-sm-11">
+            
+                  <script id="container" name="description" type="text/plain"></script>
+                  <script type="text/javascript"> var ue = UE.getEditor('container'); </script>
+      
+            
+              </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <input type="submit" class="btn btn-default" value="添加" />
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<include file="common:footer" />

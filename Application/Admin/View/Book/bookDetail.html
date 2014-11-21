@@ -1,40 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>图书详细信息</title>
-  </head>
-  <body>
-    <h1>图书详细信息</h1>
-    <div>
-      <div>
-        <h3>书名:{$b.title}</h3>
-        <span>英文名:{$b.title_en}</span>
-        <span>作者:
-          <foreach name="b.author" item="a">
-          <if condition="$a['author_role'] == 1">
-          [{$a.nation_remark}]{$a.author_name}
-          </if>
-          </foreach>
-        </span>
-        <span>译者:
-          <foreach name="b.author" item="a">
-          <if condition="$a['author_role'] == 2">
-          [{$a.nation_remark}]{$a.author_name}
-          </if>
-          </foreach>
-        </span>
-        <span>出版社:{$b.publisher}</span>
-        <span>ISBN:{$b.isbn}</span>
-        <span>封面图片:
-          <foreach name="cover_list" item="cover">
-          <img src="__PUBLIC__/Book_img/{$b.bid}/{$cover.name}" />
-          </foreach>
-        </span>
-      </div>
-      <div>
-        <h5>详细介绍</h5>
-        <p>{$b.description|htmlspecialchars_decode}</p>
-      </div>
+<include file="common:header" />
+<title>{$b.title} - 图书详细信息</title>
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+        <h2>{$b.title} 信息</h2>
+        
+        <dl class="dl-horizontal">
+        <dt>书名</dt><dd>{$b.title}</dd>
+        <dt>英文名</dt><dd>{$b.title_en}</dd>
+        <dt>作者</dt><foreach name="b.author" item="a"><if condition="$a['author_role'] == 1"><dd>[{$a.nation_remark}] {$a.author_name}</dd></if></foreach>
+        <dt>译者</dt><foreach name="b.author" item="a"><if condition="$a['author_role'] == 2"><dd>[{$a.nation_remark}] {$a.author_name}</dd></if></foreach>
+        <dt>出版社</dt><dd>{$b.publisher}</dd>
+        <dt>ISBN</dt><dd>{$b.isbn}</dd>
+        <dt>定价</dt><dd>{$b.price}</dd>
+        <dt>封面图片</dt><dd><foreach name="cover_list" item="cover"><img src="__PUBLIC__/Book_img/{$b.bid}/{$cover.name}" /></foreach></dd>
+        <dt>详细介绍</dt><dd>{$b.description|htmlspecialchars_decode}</dd>
+        </dl>
+
+      
     </div>
-  </body>
-</html>
+
+  </div>
+</div>
+<include file="common:footer" />

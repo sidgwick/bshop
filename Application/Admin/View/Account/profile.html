@@ -1,25 +1,55 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>个人信息修改</title>
-  </head>
-  <body>
-    <form action="{:U('Account/profile')}" method="post">
-      <div>
-        <p><span>用户ID:</span><span>{$userinfo.auid}</span>
-        <p><span>用户名:</span><span>{$userinfo.username}</span>
-        <p><span>角色组:</span><span>
-          <foreach name="userinfo.role" item="role">
-          {$role['remark']}
-          </foreach>
-        </span>
+<include file="common:header" />
+<link href="__CSS__/newUser.css" rel="stylesheet">
+<title>个人信息修改</title>
+<include file="common:top" />
+
+<div class="container-fluid">
+  <div class="row">
+    <include file="common:left" />
+    <div class="col-sm-9 col-md-10 main">
+      <!-- 再次使用栅格系统, 使表单看起来不是太大  -->
+      <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2">
+        <h2>个人信息修改</h2>
+        <form class="form-horizontal" role="form" action="{:U('Account/profile')}" method="post">
+          <div class="form-group">
+            <label for="inputUID" class="col-sm-2 control-label">用户ID</label>
+            <div class="col-sm-8">
+              <input type="text" value="{$userinfo.auid}" placeholder="用户ID" class="form-control" id="inputUID" disabled />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputUname" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-8">
+              <input type="text" value="{$userinfo.username}" placeholder="用户名" class="form-control" id="inputUname" disabled />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputRole" class="col-sm-2 control-label">角色组</label>
+            <div class="col-sm-8">
+              <span class="form-control" id="inputRole" disabled><foreach name="userinfo.role" item="role">{$role['remark']}</foreach></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">电子邮件</label>
+            <div class="col-sm-8">
+              <input type="email" name="email" value="{$userinfo.email}" placeholder="Email" class="form-control" id="inputEmail" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputMobile" class="col-sm-2 control-label">手机号码</label>
+            <div class="col-sm-8">
+              <input type="text" name="mobile" value="{$userinfo.mobile}" placeholder="手机号码" class="form-control" id="inputMobile" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <input type="submit" class="btn btn-default" value="提交修改" />
+            </div>
+          </div>
+        </form>
       </div>
-      <input type="email" name="email" value="{$userinfo.email}"/><br />
-      <input type="text" name="mobile" value="{$userinfo.mobile}" /><br />
-      <!--
-      <input type="text" name="security" placeholder="密保问题" /><br />
-      -->
-      <input type="submit" value="修改" /><br />
-    </form>
-  </body>
-</html>
+    </div>
+
+  </div>
+</div>
+<include file="common:footer" />
