@@ -20,31 +20,18 @@ class BookController extends AdminController {
     }
 
     /*
-     * 新添加图书
-     */
-    public function editBook() {
-        if (IS_POST) {
-            $this->doNewBook();
-        } else {
-            $country_list = M('country')->order('name')->select();
-
-            $this->assign('country_list', $country_list);
-            $this->display();
-        }
-    }
-
-    /*
      * 处理添加图书动作
      * 这里涉及到非常麻烦的数据库操作(很多,但是不复杂),耐心处理一下
      */
     private function doNewBook() {
         // 取出 title, title_e, publisher, isbn, description保存到book表
         $book['title'] = I('title');
-        $book['title_en'] = I('title_e');
+        $book['title_en'] = I('title_en');
         $book['publisher'] = I('publisher');
         $book['isbn'] = I('isbn');
         $book['category'] = I('category');
         $book['description'] = I('description');
+        $book['price'] = I('price');
         
         // 写入数据库(会检测重复)
         $bid = $this->doNewBookTable($book);
@@ -189,6 +176,20 @@ class BookController extends AdminController {
         $r['book_id'] = $bid;
         $r['author_id'] = $aid;
         $radb->add($r);
+    }
+
+    /*
+     * 新添加图书
+     */
+    public function editBook() {
+        if (IS_POST) {
+            $this->doNewBook();
+        } else {
+            $country_list = M('country')->order('name')->select();
+
+            $this->assign('country_list', $country_list);
+            $this->display();
+        }
     }
 
     /*

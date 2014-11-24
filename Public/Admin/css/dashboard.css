@@ -43,11 +43,10 @@
  * Footer
  */
 footer.footer {
-    padding: 22px 0;
+    padding: 23px 0;
     color: #999;
     text-align: center;
     background-color: #222222;
-    border-top: 2px solid #e5e5e5;
     bottom: 0;
 }
 

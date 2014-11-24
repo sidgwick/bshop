@@ -13,6 +13,7 @@ class BookViewModel extends ViewModel {
             'title_en',
             'publisher',
             'isbn',
+            'price',
             'description'
         ),
         'Author' => array(
