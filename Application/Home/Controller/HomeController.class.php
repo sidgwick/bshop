@@ -18,4 +18,8 @@ class HomeController extends Controller {
     public function __get($key) {
         return session($key);
     }
+    
+    public function __set($key, $value) {
+        session($key, $value);
+    }
 }

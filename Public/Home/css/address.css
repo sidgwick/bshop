@@ -1,0 +1,38 @@
+select.address-one-third {
+    width: 250px;
+}
+
+.address-content select {
+    margin: 0px 0px 15px;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+#street {
+    width: 80%;
+}
+
+.address-content p label {
+    padding: 10px 0;
+}
+
+.address-content p input[type="text"] {
+    margin: 0px 0px 15px;
+    padding: 10px 12px;
+}
+
+p.address-two {
+    width: 370px;
+}
+
+p.horizontal label {
+    float: left;
+    width: 80px;
+    font-size: 16px;
+
+}
+
+p.horizontal input {
+    float: left;
+    width: 240px;
+}

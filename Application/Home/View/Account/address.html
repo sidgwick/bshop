@@ -1,0 +1,85 @@
+<extend name="Common:base" />
+
+<block name="title"><title>收货地址 - 爱读书店</title></block>
+
+<block name="stylesheet">
+<link rel="stylesheet" href="__CSS__/address.css" id="colors">
+</block>
+
+<block name="javascript">
+<script src="__JS__/address.js"></script>
+<script>
+  var subregion = "{:U('Cart/subregion')}";
+</script>
+</block>
+
+<block name="breadcrumbs">
+<!-- Titlebar -->
+<section class="titlebar">
+  <div class="container">
+    <div class="sixteen columns">
+      <h2>收货地址</h2>
+
+      <nav id="breadcrumbs">
+        <ul>
+          <li><a href="{:U('Index/index')}">首页</a></li>
+          <li><a href="{:U('Account/index')}">个人中心</a></li>
+          <li>收货地址</li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</section>
+</block>
+
+<block name="main-content">
+<!-- Container -->
+<div class="container">
+
+  <div class="fourteen columns margin-bottom-25 centered">
+    <h3 class="headline">收货地址</h3><span class="line" style="margin-bottom:20px;"></span>
+    <div class="clearfix"></div>
+    <form method="post" action="{:U('Account/address')}" class="address-content">
+
+      <div class="fullwidth" id="address">
+        <label class="billing">请选择省/市/区/县: <abbr>*</abbr></label>
+        <select name="province" class="address-one-third columns" id="province">
+          <option value="" id="default-province">选择省</option>
+          <foreach name="province" item="p">
+          <option value="{$p['id']}" id="{$p.name}">{$p.name}</option>
+          </foreach>
+        </select>
+        <select name="city" class="address-one-third columns" id="city">
+          <option value="">选择市</option>
+        </select>
+        <select name="country" class="address-one-third columns" id="country">
+          <option value="">选择区/县</option>
+        </select>
+      </div>
+      
+      <p class="form-row form-row-wide address">
+      <label for="street">街道地址<span class="required">*</span></label>
+      <input type="text" class="input-text" name="street" id="street" value="" placeholder="街道地址" />
+      </p>
+      
+      <p class="form-row form-row-wide address-two columns horizontal">
+      <label for="receiver">收货人<span class="required">*</span></label>
+      <input type="text" class="input-text" name="receiver" id="receiver" value="" placeholder="收货人" />
+      </p>
+
+      <p class="form-row form-row-wide address-two columns horizontal">
+      <label for="mobile">联系电话<span class="required">*</span></label>
+      <input type="text" class="input-text" name="mobile" id="mobile" value="" placeholder="联系电话" />
+      </p>
+
+      <div class="clearfix"></div>
+
+      <p class="form-row">
+      <input type="submit" class="button" value="新建地址" />
+      </p>
+    </form>
+  </div>
+
+</div>
+</block>

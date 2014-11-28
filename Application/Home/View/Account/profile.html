@@ -1,0 +1,60 @@
+<extend name="Common:base" />
+
+<block name="title"><title>修改个人信息 - 爱读书店</title></block>
+
+<block name="breadcrumbs">
+<!-- Titlebar -->
+<section class="titlebar">
+  <div class="container">
+    <div class="sixteen columns">
+      <h2>修改个人信息</h2>
+
+      <nav id="breadcrumbs">
+        <ul>
+          <li><a href="{:U('Index/index')}">首页</a></li>
+          <li><a href="{:U('Account/index')}">个人中心</a></li>
+          <li>修改个人信息</li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</section>
+</block>
+
+<block name="main-content">
+<!-- Container -->
+<div class="container">
+
+  <div class="six columns centered">
+        <h3 class="headline">修改个人信息</h3><span class="line" style="margin-bottom:20px;"></span>
+        <div class="clearfix"></div>
+        <form method="post" action="{:U('Account/profile')}">
+          <p class="form-row form-row-wide">
+          <label for="name">用户名: <span class="required">*</span></label>
+          <input type="text" class="input-text" name="username" id="name" value="{$user.username}" placeholder="用户名称" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="email">电子邮件: <span class="required">*</span></label>
+          <input type="email" class="input-text" name="email" id="email" value="{$user.email}" placeholder="电子邮件" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="mobile">手机号码: <span class="required">*</span></label>
+          <input type="text" class="input-text" name="mobile" id="mobile" value="{$user.mobile}" placeholder="手机号码" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="password">当前密码: <span class="required">(用于授权更改信息)*</span></label>
+          <input type="password" class="input-text" name="password" id="password" placeholder="密码" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="security">密保问题: <span class="required">(用于授权更改信息)*</span></label>
+          <input type="text" class="input-text" name="security" id="security" value="" placeholder="密保问题" />
+          </p>
+          <p class="form-row">
+          <input type="submit" class="button" value="提交修改" />
+          </p>
+        </form>
+      </div>
+      
+</div>
+</block>
