@@ -1,0 +1,49 @@
+.dl-horizontal dt {
+    float: left;
+    width: 90px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dl-horizontal dt i {
+    text-align: center;
+    color: #606060;
+    width: 25px;
+}
+
+.dl-horizontal dd {
+    margin-left: 110px;
+}
+
+.omega {
+    margin: 10px 0 0 20px;
+}
+
+/* List Styles
+------------------------------------- */
+.list-address li {
+	list-style: none;
+	margin: 7px 0;
+	margin-left: 2px;
+}
+
+.list-address li:first-child {
+	margin-top: 0;
+}
+
+.list-address li:before {
+	content: "";
+	font-family: "FontAwesome";
+	margin: 0 7px 0 0;
+	position: relative;
+	color: #a0a0a0;
+}
+
+.list-address.color li:before {
+	color: #3ACF87;
+}
+
+.list-address li:before { content: ""; }

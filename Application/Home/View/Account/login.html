@@ -1,0 +1,100 @@
+<extend name="Common:base" />
+
+<block name="title"><title>用户登录/注册 - 爱读书店</title></block>
+
+<block name="javascript">
+<script src="__JS__/login.js"></script>
+</block>
+
+<block name="breadcrumbs">
+<!-- Titlebar -->
+<section class="titlebar">
+  <div class="container">
+    <div class="sixteen columns">
+      <h2>用户登录/注册</h2>
+
+      <nav id="breadcrumbs">
+        <ul>
+          <li><a href="{:U('Index/index')}">首页</a></li>
+          <li>用户登录/注册</li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</section>
+</block>
+
+<block name="main-content">
+<!-- Container -->
+<div class="container">
+
+  <div class="six columns centered">
+
+    <ul class="tabs-nav my-account">
+      <li class=""><a href="#tab_login">登录</a></li>
+      <li><a href="#tab_register">注册</a></li>
+    </ul>
+
+    <div class="tabs-container">
+      <!-- Login -->
+      <div class="tab-content" id="tab_login" style="display: none;">
+        <h3 class="headline">用户登录</h3><span class="line" style="margin-bottom:20px;"></span><div class="clearfix"></div>
+        <form method="post" class="login"  action="{:U('Account/login')}">
+          <p class="form-row form-row-wide">
+          <label for="username">用户名称: <span class="required">*</span></label>
+          <input type="text" class="input-text" name="username" id="username" value="" placeholder="用户名称" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="password">密码: <span class="required">*</span></label>
+          <input class="input-text" type="password" name="password" id="password" placeholder="登陆密码" />
+          </p>
+          <p class="form-row">
+          <input type="submit" class="button" name="login" value="登录" />
+          <label for="rememberme" class="rememberme">
+            <input name="rememberme" type="checkbox" id="rememberme" value="forever" /> 以后自动登录</label>
+          </p>
+          <p class="lost_password">
+          <a href="{:U('Account/resetPassword')}" >忘记密码?</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Register -->
+      <div class="tab-content" id="tab_register" style="display: none;">
+
+        <h3 class="headline">注册</h3><span class="line" style="margin-bottom:20px;"></span><div class="clearfix"></div>
+        <form method="post" class="register" action="{:U('Account/register')}">
+          <p class="form-row form-row-wide">
+          <label for="reg_name">用户名: <span class="required">*</span></label>
+          <input type="text" class="input-text" name="username" id="reg_name" value="" placeholder="用户名称" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="reg_password">密码: <span class="required">*</span></label>
+          <input type="password" class="input-text" name="password" id="reg_password" placeholder="密码" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="reg_password2">重复密码: <span class="required">*</span></label>
+          <input type="password" class="input-text" name="pwd2" id="reg_password2" placeholder="重复密码" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="reg_email">电子邮件: <span class="required">*</span></label>
+          <input type="email" class="input-text" name="email" id="reg_email" value="" placeholder="电子邮件" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="reg_mobile">手机号码: <span class="required">*</span></label>
+          <input type="text" class="input-text" name="mobile" id="reg_mobile" value="" placeholder="手机号码" />
+          </p>
+          <p class="form-row form-row-wide">
+          <label for="reg_security">密保问题: <span class="required">*</span></label>
+          <input type="text" class="input-text" name="security" id="reg_security" value="" placeholder="密保问题" />
+          </p>
+          <p class="form-row">
+          <input type="submit" class="button" name="register" value="注册" />
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</block>

@@ -1,0 +1,79 @@
+<extend name="Common:base" />
+
+<block name="title"><title>个人档案 - 爱读书店</title></block>
+
+<block name="stylesheet">
+<link rel="stylesheet" href="__CSS__/common.css" id="colors">
+</block>
+
+<block name="breadcrumbs">
+<!-- Titlebar -->
+<section class="titlebar">
+  <div class="container">
+    <div class="sixteen columns">
+      <h2>个人档案</h2>
+
+      <nav id="breadcrumbs">
+        <ul>
+          <li><a href="{:U('Index/index')}">首页</a></li>
+          <li>个人档案</li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</section>
+</block>
+
+<block name="main-content">
+<!-- Container -->
+<div class="container">
+
+  <div class="eight columns margin-bottom-25 userinfo-block">
+    <!-- Headline -->
+    <h3 class="headline">用户详细信息</h3><span class="line margin-bottom-25"></span>
+    <div class="clearfix"></div>
+    <dl class="dl-horizontal">
+      <dt><i class="fa fa-user"></i> 用户名称</dt><dd>{$user.username}</dd>
+      <dt><i class="fa fa-mobile"></i> 手机号码</dt><dd>{$user.mobile}</dd>
+      <dt><i class="fa fa-envelope"></i> 电子邮件</dt><dd>{$user.email}</dd>
+    </dl>
+    <div class="clearfix"></div>
+    <div class="four columns omega">
+      <a href="{:U('Account/profile')}">修改个人信息</a><br>
+    </div>
+
+  </div>
+
+  <div class="eight columns margin-bottom-25 userinfo-block">
+    <!-- Headline -->
+    <h3 class="headline">安全相关</h3><span class="line margin-bottom-25"></span>
+    <div class="clearfix"></div>
+    <dl class="dl-horizontal">
+      <dt>上次登录时间</dt><dd>{$user.last_login_time|date='Y-m-d H:i:s', ###}</dd>
+      <dt>上次登录IP</dt><dd>{$user.last_login_ip}</dd>
+    </dl>
+    <div class="clearfix"></div>
+    <div class="four columns omega">
+      <a href="{:U('Account/password')}">修改密码</a><br>
+      <a href="{:U('Account/security')}">修改密保</a><br>
+    </div>
+
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="eight columns margin-bottom-25 userinfo-block">
+    <!-- Headline -->
+    <h3 class="headline">收获地址</h3><span class="line margin-bottom-25"></span>
+    <div class="clearfix"></div>
+    <ul class="list-address color">
+      <li>Lorem ipsum dolor sit amet</li>
+    </ul>
+    <div class="clearfix"></div>
+    <div class="four columns omega">
+      <a href="{:U('Account/address')}">添加收货地址</a><br>
+    </div>
+  </div>
+
+</div>
+</block>

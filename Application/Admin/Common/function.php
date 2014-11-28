@@ -1,6 +1,6 @@
 <?php
-/**
- * 检测登录函数
+/*
+ * 检测登录函数(后台专用)
  * @return mixed AUID-成功/false-失败
  */
 function check_login() {
