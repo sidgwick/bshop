@@ -32,35 +32,40 @@ class BookController extends AdminController {
         $book['category'] = I('category');
         $book['description'] = I('description');
         $book['price'] = I('price');
-        
+
         // 写入数据库(会检测重复)
         $bid = $this->doNewBookTable($book);
         if (!$bid) {
             $this->error('请不要重复提交数据');
         }
         // 取出author, nationality保存到author表
-        // TODO: 这里将来可以加上循环, 使得支持多个作者
-        $author['name'] = I('author');
-        $author['nid'] = I('nationality');
-        $author['role'] = 1;
-        $aid = $this->doNewBookAuthorTable($author, $bid);
+        $a = I('author');
+        $an = I('a_nationality');
+        foreach ($a as $key => $value) {
+            $author['name'] = $value;
+            $author['nid'] = $an[$key];
+            $author['role'] = 1;
+
+            $aid = $this->doNewBookAuthorTable($author, $bid);
+        }
 
         // 取出translator保存到author表
-        // TODO: 将来做成循环, 以支持多个译者
-        $translator['name'] = I('translator');
-        $translator['nid'] = 224; // 译者, 硬编码设定国籍为中国
-        $translator['role'] = 2;
-        $aid = $this->doNewBookAuthorTable($translator, $bid);
+        $t = I('translator');
+        $tn = I('t_nationality');
+        foreach ($t as $key => $value) {
+            $translator['name'] = $value;
+            $translator['nid'] = $tn[$key];
+            $translator['role'] = 2;
 
-        // TODO 这里还有类目咩有
+            $aid = $this->doNewBookAuthorTable($translator, $bid);
+        }
 
         // 保存图片到/Public/Cover/目录
-        // TODO: 将来搞成循环, 以支持多图片
         $this->doNewBookUpload($bid);
 
         $this->success('新加图书完成');
     }
-    
+
     /*
      * 这个函数实际上是帮Ueditor擦屁股
      * 鉴于Ueditor上传并不总是能满足自己需求, 所以上传操作只是简单的改了下上传
@@ -142,7 +147,7 @@ class BookController extends AdminController {
         unset($data['description']);
         $bdb->create($data);
         $bid = $bdb->add();
-        
+
         // 移动description需要的文件, 替换相应的链接
         $desc = $this->UeditorUpload($bid, $desc);
         $description['description'] = $desc;
@@ -203,7 +208,7 @@ class BookController extends AdminController {
         $this->assign('book_list', $book_list);
         $this->display();
     }
-    
+
     /*
      * 显示图书详细信息
      */

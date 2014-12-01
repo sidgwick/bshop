@@ -13,6 +13,10 @@
 <script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.all.js"></script>
 </block>
 
+<block name="javascript-bottom">
+<script type="text/javascript" src="__JS__/newBook.js"></script>
+</block>
+
 <block name="main-content">
 
     <div class="col-sm-9 col-md-10 main">
@@ -28,18 +32,30 @@
               <input type="text" name="title_en" placeholder="图书外文名称" class="form-control" id="inputTitle_en" />
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group more">
             <label for="inputAuthor" class="col-md-1 control-label">作者</label>
-            <div class="col-sm-3">
-              <input type="text" class="form-control" id="inputAuthor" name="pwd" placeholder="作者" />
-            </div>
-            <label for="inputAuthorNationality" class="col-md-1 control-label">作者国籍</label>
             <div class="col-sm-2">
-            <select name="nationality" id="inputAuthorNationality" class="form-control"><foreach name="country_list" item="nation"><option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option></foreach></select>
+              <input type="text" class="form-control" id="inputAuthor" name="author[]" placeholder="作者" />
             </div>
+            <label for="inputAuthorNationality" class="col-md-1 control-label">国籍</label>
+            <div class="col-sm-3">
+            <select name="a_nationality[]" id="inputAuthorNationality" class="form-control"><foreach name="country_list" item="nation"><option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option></foreach></select>
+            </div>
+            <div class="col-sm-3 more-area">
+            <button type="button" class="btn btn-primary btn-sm more-input"><span class="glyphicon glyphicon-plus"></span> 新加更多作者</button>
+            </div>
+          </div>
+          <div class="form-group more">
             <label for="inputTranslater" class="col-md-1 control-label">译者</label>
             <div class="col-sm-2">
-              <input type="text" class="form-control" id="inputTranslater"  name="translator" placeholder="译者" />
+              <input type="text" class="form-control" id="inputTranslater"  name="translator[]" placeholder="译者" />
+            </div>
+            <label for="inputTranslaterNationality" class="col-md-1 control-label">国籍</label>
+            <div class="col-sm-3">
+            <select name="t_nationality[]" id="inputTranslaterNationality" class="form-control"><foreach name="country_list" item="nation"><option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option></foreach></select>
+            </div>
+            <div class="col-sm-3 more-area">
+            <button type="button" class="btn btn-primary btn-sm more-input"><span class="glyphicon glyphicon-plus"></span> 新加更多译者</button>
             </div>
           </div>
           <div class="form-group">
@@ -62,10 +78,13 @@
             <select name="category" id="inputCategory" class="form-control"><foreach name="category_list" item="category"><option value="{$category['id']}">({$category['label']})       {$category['remark']}</option></foreach></select>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group more">
             <label for="inputCover" class="col-md-1 control-label">图书封面</label>
             <div class="col-sm-8">
-              <input type="file"  id="inputCover" name="cover" />
+              <input type="file"  id="inputCover" name="cover[]" />
+            </div>
+            <div class="col-sm-3 more-area">
+            <button type="button" class="btn btn-primary btn-sm more-input"><span class="glyphicon glyphicon-plus"></span> 新加更多封面</button>
             </div>
           </div>
           <div class="form-group">
@@ -74,8 +93,7 @@
             
                   <script id="container" name="description" type="text/plain"></script>
                   <script type="text/javascript"> var ue = UE.getEditor('container'); </script>
-      
-            
+                  
               </div>
           </div>
           <div class="form-group">
@@ -86,6 +104,4 @@
         </form>
 
       </div>
-    </div>
-
 </block>

@@ -17,7 +17,7 @@
         <dt>出版社</dt><dd>{$b.publisher}</dd>
         <dt>ISBN</dt><dd>{$b.isbn}</dd>
         <dt>定价</dt><dd>{$b.price}</dd>
-        <dt>封面图片</dt><dd><foreach name="cover_list" item="cover"><img src="__PUBLIC__/Book_img/{$b.bid}/{$cover.name}" /></foreach></dd>
+        <dt>封面图片</dt><dd><foreach name="cover_list" item="cover"><img width="220px" height="250px" src="__PUBLIC__/Book_img/{$b.bid}/{$cover.name}" /></foreach></dd>
         <dt>详细介绍</dt><dd>{$b.description|htmlspecialchars_decode}</dd>
         </dl>
 
