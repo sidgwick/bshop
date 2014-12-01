@@ -93,4 +93,28 @@ function list_merge($list, $pid = 0) {
     return $tmp;
 }
 
+/*
+ * 模板里没有计数功能, 真麻烦, 这个函数决定显示不显示(更多按钮)
+ * @param integer $k 键值
+ * @param array $authors 作者 + 译者列表
+ * @return boolean 显示返回True, 否则false
+ */
+
+function display_more($k, $authors) {
+    $max = 0;
+    $type = $authors[$k]['author_role'];
+    
+    foreach ($authors as $key => $item) {
+        if ($item['author_role'] == $type) {
+            $max = $max > $key ? $max : $key;
+        }
+    }
+    
+    if ($max == $k) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ?>

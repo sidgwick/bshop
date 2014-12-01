@@ -14,21 +14,29 @@ class BookViewModel extends ViewModel {
             'publisher',
             'isbn',
             'price',
-            'description'
+            'category',
+            'brief',
+            'description',
         ),
         'Author' => array(
             'id' => 'author_id',
             'name' => 'author_name',
-            'role' => 'author_role'
+            'role' => 'author_role',
         ),
         'BookAuthor' => array(
-            '_on' => 'Book.id = BookAuthor.book_id AND Author.id = BookAuthor.author_id'
+            '_on' => 'Book.id = BookAuthor.book_id AND Author.id = BookAuthor.author_id',
         ),
         'Country' => array(
             'id' => 'nation_id',
             'remark' => 'nation_remark',
             'name' => 'nation_name',
             '_on' => 'Author.nid = Country.id'
+        ),
+        'Category' => array(
+            'id' => 'category_id',
+            'remark' => 'category_remark',
+            'label' => 'category_label',
+            '_on' => 'Category.id = Book.category'
         ),
     );
 

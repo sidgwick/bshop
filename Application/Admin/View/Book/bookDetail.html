@@ -8,16 +8,18 @@
 
     <div class="col-sm-9 col-md-10 main">
         <h2>{$b.title} 信息</h2>
-        
+        <a href="{:U('Book/editBook', array('bid' => $b['bid']))}">编辑图书</a>
         <dl class="dl-horizontal">
         <dt>书名</dt><dd>{$b.title}</dd>
         <dt>英文名</dt><dd>{$b.title_en}</dd>
-        <dt>作者</dt><foreach name="b.author" item="a"><if condition="$a['author_role'] == 1"><dd>[{$a.nation_remark}] {$a.author_name}</dd></if></foreach>
-        <dt>译者</dt><foreach name="b.author" item="a"><if condition="$a['author_role'] == 2"><dd>[{$a.nation_remark}] {$a.author_name}</dd></if></foreach>
+        <dt>作者</dt><dd><foreach name="b.author" item="a"><if condition="$a['author_role'] == 1">[{$a.nation_remark}] {$a.author_name}</if></foreach></dd>
+        <dt>译者</dt><dd><foreach name="b.author" item="a"><if condition="$a['author_role'] == 2">[{$a.nation_remark}] {$a.author_name}</if></foreach></dd>
         <dt>出版社</dt><dd>{$b.publisher}</dd>
         <dt>ISBN</dt><dd>{$b.isbn}</dd>
+        <dt>分类</dt><dd>({$b.category_label}){$b.category_remark}</dd>
         <dt>定价</dt><dd>{$b.price}</dd>
         <dt>封面图片</dt><dd><foreach name="cover_list" item="cover"><img width="220px" height="250px" src="__PUBLIC__/Book_img/{$b.bid}/{$cover.name}" /></foreach></dd>
+        <dt>简要描述</dt><dd>{$b.brief|htmlspecialchars_decode}</dd>
         <dt>详细介绍</dt><dd>{$b.description|htmlspecialchars_decode}</dd>
         </dl>
 

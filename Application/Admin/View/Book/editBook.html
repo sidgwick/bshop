@@ -5,7 +5,7 @@
 </block>
 
 <block name="title">
-<title>新增图书</title>
+<title>{$b.title} - 图书编辑</title>
 </block>
 
 <block name="javascript-top">
@@ -13,76 +13,161 @@
 <script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.all.js"></script>
 </block>
 
+<block name="javascript-bottom">
+<script type="text/javascript" src="__JS__/newBook.js"></script>
+</block>
+
 <block name="main-content">
 
-    <div class="col-sm-9 col-md-10 main">
-        <h2>修改图书信息</h2>
-        <form class="form-horizontal" role="form" action="{:U('Book/newBook')}" method="post" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="inputTitle" class="col-md-1 control-label">名称</label>
-            <div class="col-sm-4">
-              <input type="text" name="title" placeholder="图书名称" class="form-control" id="inputTitle" />
-            </div>
-            <label for="inputTitle_en" class="col-md-1 control-label">外文名称</label>
-            <div class="col-sm-4">
-              <input type="text" name="title_en" placeholder="图书外文名称" class="form-control" id="inputTitle_en" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputAuthor" class="col-md-1 control-label">作者</label>
-            <div class="col-sm-3">
-              <input type="text" class="form-control" id="inputAuthor" name="pwd" placeholder="作者" />
-            </div>
-            <label for="inputAuthorNationality" class="col-md-1 control-label">作者国籍</label>
-            <div class="col-sm-2">
-            <select name="nationality" id="inputAuthorNationality" class="form-control"><foreach name="country_list" item="nation"><option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option></foreach></select>
-            </div>
-            <label for="inputTranslater" class="col-md-1 control-label">译者</label>
-            <div class="col-sm-2">
-              <input type="text" class="form-control" id="inputTranslater"  name="translator" placeholder="译者" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputIsbn" class="col-md-1 control-label">ISBN</label>
-            <div class="col-sm-3">
-              <input type="text" name="isbn" placeholder="ISBN" class="form-control" id="inputIsbn" />
-            </div>
-            <label for="inputPublisher" class="col-md-1 control-label">出版社</label>
-            <div class="col-sm-2">
-              <input type="text" name="publisher" placeholder="出版社" class="form-control" id="inputPublisher" />
-            </div>
-            <label for="inputPrice" class="col-md-1 control-label">定价</label>
-            <div class="col-sm-2">
-              <input type="text" name="price" placeholder="定价" class="form-control" id="inputPrice" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputCategory" class="col-md-1 control-label">图书分类</label>
-            <div class="col-sm-4">
-            <select name="category" id="inputCategory" class="form-control"><foreach name="category_list" item="category"><option value="{$category['id']}">({$category['label']})       {$category['remark']}</option></foreach></select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputCover" class="col-md-1 control-label">图书封面</label>
-            <div class="col-sm-8">
-              <input type="file"  id="inputCover" name="cover" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputDescription" class="col-md-1 control-label">图书介绍</label>
-            <div class="col-sm-11">
-                  <script id="container" name="description" type="text/plain"></script>
-                  <script type="text/javascript"> var ue = UE.getEditor('container'); </script>
-              </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <input type="submit" class="btn btn-default" value="添加" />
-            </div>
-          </div>
-        </form>
-
+<div class="col-sm-9 col-md-10 main">
+  <h2>编辑图书</h2>
+  <form class="form-horizontal" role="form" action="{:U('Book/editBook')}" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="inputTitle" class="col-md-1 control-label">名称</label>
+      <div class="col-sm-4">
+        <input type="text" name="title" placeholder="图书名称" class="form-control" id="inputTitle" value="{$b.title}" />
+      </div>
+      <label for="inputTitle_en" class="col-md-1 control-label">外文名称</label>
+      <div class="col-sm-4">
+        <input type="text" name="title_en" placeholder="图书外文名称" class="form-control" id="inputTitle_en"
+        value="{$b.title_en}" />
       </div>
     </div>
 
+
+    <foreach name="b.author" item="a" key="k">
+    <if condition="$a['author_role'] == 1">
+
+    <div class="form-group more">
+      <label for="inputAuthor" class="col-md-1 control-label">作者</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" id="inputAuthor" name="author[]" placeholder="作者" value="{$a.author_name}" />
+      </div>
+      <label for="inputAuthorNationality" class="col-md-1 control-label">国籍</label>
+      <div class="col-sm-3">
+        <select name="a_nationality[]" id="inputAuthorNationality" class="form-control">
+          <foreach name="country_list" item="nation">
+          <if condition="$a['nation_id'] == $nation['id']">
+          <option value="{$nation['id']}" selected="selected">{$nation['name']}({$nation['remark']})</option>
+          <else />
+          <option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option>
+          </if>
+          </foreach>
+        </select>
+      </div>
+
+      <if condition="display_more($k, $b['author'])">
+      <div class="col-sm-3 more-area">
+        <button type="button" class="btn btn-primary btn-sm more-input">
+          <span class="glyphicon glyphicon-plus"></span> 新加更多作者
+        </button>
+      </div>
+      </if>
+    </div>
+
+    </if>
+    </foreach>
+
+    <foreach name="b.author" item="a" key="k">
+    <if condition="$a['author_role'] == 2">
+
+    <div class="form-group more">
+      <label for="inputTranslater" class="col-md-1 control-label">译者</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" id="inputTranslater"  name="translator[]" placeholder="译者" value="{$a.author_name}" />
+      </div>
+      <label for="inputTranslaterNationality" class="col-md-1 control-label">国籍</label>
+      <div class="col-sm-3">
+        <select name="a_nationality[]" id="inputAuthorNationality" class="form-control">
+          <foreach name="country_list" item="nation">
+          <if condition="$a['nation_id'] == $nation['id']">
+          <option value="{$nation['id']}" selected="selected">{$nation['name']}({$nation['remark']})</option>
+          <else />
+          <option value="{$nation['id']}">{$nation['name']}({$nation['remark']})</option>
+          </if>
+          </foreach>
+        </select>
+      </div>
+      <if condition="display_more($k, $b['author'])">
+      <div class="col-sm-3 more-area">
+        <button type="button" class="btn btn-primary btn-sm more-input">
+          <span class="glyphicon glyphicon-plus"></span> 新加更多译者
+        </button>
+      </div>
+      </if>
+    </div>
+
+    </if>
+    </foreach>
+
+
+
+    <div class="form-group">
+      <label for="inputIsbn" class="col-md-1 control-label">ISBN</label>
+      <div class="col-sm-3">
+        <input type="text" name="isbn" placeholder="ISBN" class="form-control" id="inputIsbn" value="{$b.isbn}" />
+      </div>
+      <label for="inputPublisher" class="col-md-1 control-label">出版社</label>
+      <div class="col-sm-2">
+        <input type="text" name="publisher" placeholder="出版社" class="form-control" id="inputPublisher"
+        value="{$b.publisher}" />
+      </div>
+      <label for="inputPrice" class="col-md-1 control-label">定价</label>
+      <div class="col-sm-2">
+        <input type="text" name="price" placeholder="定价" class="form-control" id="inputPrice" value="{$b.price}" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputCategory" class="col-md-1 control-label">图书分类</label>
+      <div class="col-sm-4">
+        <select name="category" id="inputCategory" class="form-control">
+          <foreach name="category_list" item="category">
+          <if condition="$b['category'] == $category['id']">
+          <option value="{$category['id']}" selected="selected">({$category['label']})       {$category['remark']}</option>
+          <else />
+          <option value="{$category['id']}">({$category['label']})       {$category['remark']}</option>
+          </if>
+          </foreach>
+        </select>
+      </div>
+    </div>
+    <!-- TODO: 这里将来加上能编辑图片的JS代码-->
+    <div class="form-group more">
+      <label for="inputCover" class="col-md-1 control-label">图书封面</label>
+      <div class="col-sm-8">
+        <input type="file"  id="inputCover" name="cover[]" />
+      </div>
+      <div class="col-sm-3 more-area">
+        <button type="button" class="btn btn-primary btn-sm more-input">
+          <span class="glyphicon glyphicon-plus"></span> 新加更多封面
+        </button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputBrief" class="col-md-1 control-label">简要描述</label>
+      <div class="col-sm-11">
+
+        <script id="brief-desc" name="brief" type="text/plain">{$b.brief|htmlspecialchars_decode}</script>
+        <script type="text/javascript"> var ue = UE.getEditor('brief-desc'); </script>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputDescription" class="col-md-1 control-label">图书介绍</label>
+      <div class="col-sm-11">
+
+        <script id="container" name="description" type="text/plain">{$b.description|htmlspecialchars_decode}</script>
+        <script type="text/javascript"> var ue = UE.getEditor('container'); </script>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="hidden" name="bid" value="{$b.bid}" />
+        <input type="submit" class="btn btn-default" value="修改" />
+      </div>
+    </div>
+  </form>
+
+</div>
 </block>

@@ -30,6 +30,7 @@ class BookController extends AdminController {
         $book['publisher'] = I('publisher');
         $book['isbn'] = I('isbn');
         $book['category'] = I('category');
+        $book['brief'] = I('brief');
         $book['description'] = I('description');
         $book['price'] = I('price');
 
@@ -42,6 +43,9 @@ class BookController extends AdminController {
         $a = I('author');
         $an = I('a_nationality');
         foreach ($a as $key => $value) {
+            if ($value == "") {
+                continue;
+            }
             $author['name'] = $value;
             $author['nid'] = $an[$key];
             $author['role'] = 1;
@@ -53,6 +57,9 @@ class BookController extends AdminController {
         $t = I('translator');
         $tn = I('t_nationality');
         foreach ($t as $key => $value) {
+            if ($value == "") {
+                continue;
+            }
             $translator['name'] = $value;
             $translator['nid'] = $tn[$key];
             $translator['role'] = 2;
@@ -184,18 +191,89 @@ class BookController extends AdminController {
     }
 
     /*
-     * 新添加图书
+     * 编辑图书
      */
-    public function editBook() {
-        if (IS_POST) {
-            $this->doNewBook();
-        } else {
-            $country_list = M('country')->order('name')->select();
+    public function editBook($bid) {
+        if (!$bid) {
+            $this->error('没有选择图书!!!');
+        }
 
+        if (IS_POST) {
+            $this->doEditBook();
+        } else {
+            // 先获取图书属性
+            $bdb = D('BookView');
+            $book = $bdb->where(array('bid' => $bid))->relationFind();
+
+            // 这个是封面信息
+            $cover = get_cover_img($bid);
+
+            $country_list = M('country')->order('name')->select();
+            $category_list = M('category')->order('label')->select();
+            
+            $this->assign('b', $book);
+            $this->assign('cover_list', $cover);
             $this->assign('country_list', $country_list);
+            $this->assign('category_list', $category_list);
             $this->display();
         }
     }
+
+    /*
+     * 处理修改图书动作
+     * 这里涉及到非常麻烦的数据库操作(很多,但是不复杂),耐心处理一下
+     */
+    private function doEditBook() {
+        // 取出 title, title_e, publisher, isbn, description保存到book表
+        $book['id'] = I('bid');
+        $book['title'] = I('title');
+        $book['title_en'] = I('title_en');
+        $book['publisher'] = I('publisher');
+        $book['isbn'] = I('isbn');
+        $book['category'] = I('category');
+        $book['brief'] = I('brief');
+        $book['description'] = I('description');
+        $book['price'] = I('price');
+
+        // 写入数据库(会检测重复)
+        $bid = $this->doNewBookTable($book);
+        if (!$bid) {
+            $this->error('请不要重复提交数据');
+        }
+        // 取出author, nationality保存到author表
+        $a = I('author');
+        $an = I('a_nationality');
+        foreach ($a as $key => $value) {
+            if ($value == "") {
+                continue;
+            }
+            $author['name'] = $value;
+            $author['nid'] = $an[$key];
+            $author['role'] = 1;
+
+            $aid = $this->doNewBookAuthorTable($author, $bid);
+        }
+
+        // 取出translator保存到author表
+        $t = I('translator');
+        $tn = I('t_nationality');
+        foreach ($t as $key => $value) {
+            if ($value == "") {
+                continue;
+            }
+            $translator['name'] = $value;
+            $translator['nid'] = $tn[$key];
+            $translator['role'] = 2;
+
+            $aid = $this->doNewBookAuthorTable($translator, $bid);
+        }
+
+        // 保存图片到/Public/Cover/目录
+        $this->doNewBookUpload($bid);
+
+        $this->success('新加图书完成');
+    }
+
 
     /*
      * 显示图书列表

@@ -1,0 +1,267 @@
+<extend name="Common:base" />
+
+<block name="title"><title>{$product.title} - 爱读书店</title></block>
+
+<block name="stylesheet">
+<link rel="stylesheet" href="__CSS__/common.css" id="colors">
+</block>
+
+<block name="breadcrumbs">
+<!-- Titlebar -->
+<section class="titlebar">
+    <div class="container">
+        <div class="sixteen columns">
+            <h2>{$product.title}</h2>
+
+            <nav id="breadcrumbs">
+                <ul>
+                    <li><a href="{:U('Index/index')}">首页</a></li>
+                    <li><a href="{:U('Product/index')}">全部商品</a></li>
+                    <li>{$product.title}</li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</section>
+</block>
+
+<block name="main-content">
+<!-- Container -->
+<div class="container">
+
+    <!-- Slider -->
+    <div class="eight columns" >
+        <div class="slider-padding">
+            <div id="product-slider-vertical" class="royalSlider rsDefault">
+                <foreach name="cover_list" item="cover">
+                <a href="__PUBLIC__/Book_img/{$product.bid}/{$cover.name}" class="mfp-gallery" title="封面">
+                    <img class="rsImg" src="__PUBLIC__/Book_img/{$product.bid}/{$cover.name}" data-rsTmb="__PUBLIC__/Book_img/{$product.bid}/{$cover.name}" />
+                </a>
+                </foreach>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+    <div class="eight columns">
+        <div class="product-page">
+
+            <!-- Headline -->
+            <section class="title">
+                <h2>{$product.title}</h2>
+                <span class="product-price">¥{$product.price}</span>
+            </section>
+
+            <!-- Text Parapgraph -->
+            <section>
+                <p class="margin-reset">
+                {$product.brief|htmlspecialchars_decode}
+                </p>
+
+                <!-- Share Buttons -->	
+                <div class="share-buttons">
+                    <ul>
+                        <li><a href="#">Share</a></li>
+                        <li class="share-facebook"><a href="#">Facebook</a></li>
+                        <li class="share-twitter"><a href="#">Twitter</a></li>
+                        <li class="share-gplus"><a href="#">Google Plus</a></li>
+                        <li class="share-pinit"><a href="#">Pin It</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+
+            </section>
+
+
+            <section class="linking">
+
+                <form action='single-product-page.html#'>
+                    <div class="qtyminus"></div>
+                    <input type='text' name="quantity" value='1' class="qty" />
+                    <div class="qtyplus"></div>
+                </form>
+
+                <a href="{:U('Cart/add', array('bid' => $product['bid']))}" class="button adc">加入购物车</a>
+                <div class="clearfix"></div>
+
+            </section>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div class="sixteen columns">
+        <!-- Tabs Navigation -->
+        <ul class="tabs-nav">
+            <li class="active"><a href="#description_tab">商品详情</a></li>
+            <li><a href="#parameter_tab">参数</a></li>
+            <li><a href="#review_tab">评论 <span class="tab-reviews">(0)</span></a></li>
+        </ul>
+
+        <!-- Tabs Content -->
+        <div class="tabs-container">
+
+            <div class="tab-content" id="description_tab">
+                <p>{$product.description|htmlspecialchars_decode}</p>
+            </div>
+
+            <div class="tab-content" id="parameter_tab">
+
+                <table class="basic-table">
+                    <tr>
+                        <th>书名</th>
+                        <td>{$product.title}</td>
+                    </tr>
+
+                    <tr>
+                        <th>外文书名</th>
+                        <td>{$product.title_en}</td>
+                    </tr>
+
+                    <tr>
+                        <th>作者</th>
+                        <td>
+                            <foreach name="product.author" item="a">
+                            <if condition="$a['author_role'] == 1">
+                            [{$a.nation_remark}] {$a.author_name} &nbsp;&nbsp;&nbsp;&nbsp;
+                            </if>
+                            </foreach>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>译者</th>
+                        <td>
+                            <foreach name="product.author" item="a">
+                            <if condition="$a['author_role'] == 2">
+                            [{$a.nation_remark}] {$a.author_name} &nbsp;&nbsp;&nbsp;&nbsp;
+                            </if>
+                            </foreach>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>出版社</th>
+                        <td>{$product.publisher}</td>
+                    </tr>
+                    <tr>
+                        <th>ISBN</th>
+                        <td>{$product.isbn}</td>
+                    </tr>
+                    <tr>
+                        <th>定价</th>
+                        <td>¥{$product.price}</td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="tab-content" id="review_tab">
+
+                <!-- Reviews -->
+                <section class="comments">
+                    <p class="margin-bottom-10">目前没有评论</p>
+
+                    <a href="#review-dialog" class="popup-with-zoom-anim button color margin-left-0">新加评论</a>
+
+                    <div id="review-dialog" class="zoom-anim-dialog mfp-hide">
+                        <h3 class="headline">添加评论</h3>
+                        <span class="line margin-bottom-25"></span><div class="clearfix"></div>
+
+                        <!-- Form -->
+                        <form id="add-comment" class="add-comment" action="{:U('Review/add')}" method="post">
+                            <fieldset>
+
+                                <div>
+                                    <label>姓名:</label> <span class="review_name">{$uname}</span>
+                                </div>
+
+                                <div>
+                                    <label>Rating:</label>
+                                    <span class="rate">
+                                        <span class="star"></span>
+                                        <span class="star"></span>
+                                        <span class="star"></span>
+                                        <span class="star"></span>
+                                        <span class="star"></span>
+                                    </span>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="margin-top-20">
+                                    <label>Email: <span>*</span></label>
+                                    <input type="text" value=""/>
+                                </div>
+
+                                <div>
+                                    <label>Review: <span>*</span></label>
+                                    <textarea cols="40" rows="3"></textarea>
+                                </div>
+
+                            </fieldset>
+
+                            <input type="hidden" name="bid" value="{$product.bid}"/>
+
+                            <a href="#" class="button color">添加拼论</a>
+                            <div class="clearfix"></div>
+
+                        </form>
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Related Products -->
+<div class="container margin-top-5">
+
+    <!-- Headline -->
+    <div class="sixteen columns">
+        <h3 class="headline">相关产品</h3>
+        <span class="line margin-bottom-0"></span>
+    </div>
+
+    <!-- Products -->
+    <div class="products products-fix">
+
+        <foreach name="relative" item="v">
+        <!-- Product #1 -->
+        <div class="four columns">
+            <figure class="product">
+                <div class="mediaholder">
+                    <a href="{:U('Product/detail', array('bid' => $v['id']))}">
+                        <img alt="" src="__PUBLIC__/Book_img/{$v.id}/main.jpg"/>
+                        <div class="cover">
+                            <img alt="" src="__PUBLIC__/Book_img/{$v.id}/main.jpg"/>
+                        </div>
+                    </a>
+                    <a href="{:U('Cart/add', array('bid' => $product['id']))}" class="product-button">
+                        <i class="fa fa-shopping-cart"></i> 加入购物车
+                    </a>
+                </div>
+
+                <a href="{:U('Product/detail', array('bid' => $v['id']))}">
+                    <section>
+                        <h5>{$v.title}</h5>
+                        <span class="product-price">¥{$v.price}</span>
+                    </section>
+                </a>
+            </figure>
+        </div>
+        </foreach>
+
+    </div>
+</div>
+
+
+</div>
+</block>
