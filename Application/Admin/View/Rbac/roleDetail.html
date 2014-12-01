@@ -1,10 +1,11 @@
-<include file="common:header" />
-<title>{$role.remark}角色</title>
-<include file="common:top" />
+<extend name="Common:base" />
 
-<div class="container-fluid">
-  <div class="row">
-    <include file="common:left" />
+<block name="title">
+<title>{$role.remark}角色</title>
+</block>
+
+<block name="main-content">
+
     <div class="col-sm-9 col-md-10 main">
         <h2>RBAC角色信息({$role.remark})</h2>
         
@@ -33,6 +34,4 @@
       
     </div>
 
-  </div>
-</div>
-<include file="common:footer" />
+</block>

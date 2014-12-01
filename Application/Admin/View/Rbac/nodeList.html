@@ -1,11 +1,16 @@
-<include file="common:header" />
-<title>结点列表</title>
-<link rel="stylesheet" href="__CSS__/list.css" />
-<include file="common:top" />
+<extend name="Common:base" />
 
-<div class="container-fluid">
-  <div class="row">
-    <include file="common:left" />
+<block name="stylesheet">
+<link rel="stylesheet" href="__CSS__/list.css" />
+</block>
+
+<block name="title">
+<title>结点列表</title>
+</block>
+
+<block name="main-content">
+
+
     <div class="col-sm-9 col-md-10 main">
     <p>
     <a href="{:U('Rbac/newNode', array('pid' => 0, 'level' => 1))}" class="btn btn-default">新添应用结点</a>
@@ -38,6 +43,5 @@
 
     </div>
 
-  </div>
-</div>
-<include file="common:footer" />
+
+</block>

@@ -1,10 +1,11 @@
-<include file="common:header" />
-    <title>后台管理首页</title>
-<include file="common:top" />
+<extend name="Common:base" />
 
-    <div class="container-fluid">
-      <div class="row">
-<include file="common:left" />
+<block name="title">
+<title>后台管理首页</title>
+</block>
+
+<block name="main-content">
+
         <div class="col-sm-9 col-md-10 main">
           <div class="alert alert-success" role="alert">
             <strong>登录成功</strong> <br /><br /><br />
@@ -13,7 +14,4 @@
             </div>
           </div>      
         </div>
-
-      </div>
-    </div>
-<include file="common:footer" />
+</block>

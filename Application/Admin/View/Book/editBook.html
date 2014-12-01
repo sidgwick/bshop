@@ -1,13 +1,20 @@
-<include file="common:header" />
-<link href="__CSS__/newBook.css" rel="stylesheet">
-    <title>修改图书信息</title>
-    <script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.all.js"></script>
-<include file="common:top" />
+<extend name="Common:base" />
 
-<div class="container-fluid">
-  <div class="row">
-    <include file="common:left" />
+<block name="stylesheet">
+<link href="__CSS__/newBook.css" rel="stylesheet">
+</block>
+
+<block name="title">
+<title>新增图书</title>
+</block>
+
+<block name="javascript-top">
+<script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Ueditor/ueditor.all.js"></script>
+</block>
+
+<block name="main-content">
+
     <div class="col-sm-9 col-md-10 main">
         <h2>修改图书信息</h2>
         <form class="form-horizontal" role="form" action="{:U('Book/newBook')}" method="post" enctype="multipart/form-data">
@@ -78,6 +85,4 @@
       </div>
     </div>
 
-  </div>
-</div>
-<include file="common:footer" />
+</block>

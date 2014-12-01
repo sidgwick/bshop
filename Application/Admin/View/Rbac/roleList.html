@@ -1,10 +1,11 @@
-<include file="common:header" />
-<title>角色(用户组)列表</title>
-<include file="common:top" />
+<extend name="Common:base" />
 
-<div class="container-fluid">
-  <div class="row">
-    <include file="common:left" />
+<block name="title">
+<title>角色(用户组)列表</title>
+</block>
+
+<block name="main-content">
+
     <div class="col-sm-9 col-md-10 main">
       <table class="table table-striped">
         <tr>
@@ -33,6 +34,4 @@
       {$pages}
     </div>
 
-  </div>
-</div>
-<include file="common:footer" />
+</block>

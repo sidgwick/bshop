@@ -1,11 +1,15 @@
-<include file="common:header" />
-<link href="__CSS__/newUser.css" rel="stylesheet">
-<title>新增结点</title>
-<include file="common:top" />
+<extend name="Common:base" />
 
-<div class="container-fluid">
-  <div class="row">
-    <include file="common:left" />
+<block name="stylesheet">
+<link href="__CSS__/newUser.css" rel="stylesheet">
+</block>
+
+<block name="title">
+<title>新增结点</title>
+</block>
+
+<block name="main-content">
+
     <div class="col-sm-9 col-md-10 main">
       <!-- 再次使用栅格系统, 使表单看起来不是太大  -->
       <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2">
@@ -64,6 +68,4 @@
       </div>
     </div>
 
-  </div>
-</div>
-<include file="common:footer" />
+</block>

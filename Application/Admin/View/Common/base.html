@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico">
+
+    <!-- Basic Page Needs -->
+    <block name="title"><title>爱读书店</title></block>
+    <block name="description"><meta name="description" content=""></block>
+    <block name="keywords"><meta name="keywords" content=""></block>
+    <block name="author"><meta name="author" content=""></block>
+
+
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="__CSS__/bootstrap.min.css">
+
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<link rel="stylesheet" href="__CSS__/bootstrap-theme.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="__JS__/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="__JS__/bootstrap.min.js"></script>
+
+
+
+    <!-- Custom styles for this template -->
+    <link href="__CSS__/dashboard.css" rel="stylesheet">
+
+    <block name="stylesheet"></block>
+    <block name="javascript-top"></block>
+  </head>
+  <body>
+
+    <!-- nav -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{:U('Index/index')}">
+            <img alt="Brand" src="__PUB_IMG__/logo.png">
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{:U('Account/logout')}">登出</a></li>
+            <li><a href="{:U('Account/passwd')}">修改密码</a></li>
+            <li><a href="{:U('Account/profile')}">修改个人信息</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+      
+      
+          <!-- left -->
+    <div class="col-sm-3 col-md-2 left-side">
+      <dl>
+        <dt><span class="glyphicon glyphicon-user"></span> 用户管理</dt>
+        <dd><a href="{:U('User/newUser')}">新添用户</a></dd>
+        <dd><a href="{:U('User/userList')}">用户列表</a></dd>
+        <dt><span class="glyphicon glyphicon-cog"></span> RBAC控制</dt>
+        <dd><a href="{:U('Rbac/roleList')}">角色列表</a></dd>
+        <dd><a href="{:U('Rbac/nodeList')}">结点列表</a></dd>
+        <dt><span class="glyphicon glyphicon-book"></span> 图书管理</dt>
+        <dd><a href="{:U('Book/newBook')}">新加图书</a></dd>
+        <dd><a href="{:U('Book/bookList')}">图书列表</a></dd>
+        <dt><span class="glyphicon glyphicon-send"></span> 订单管理</dt>
+        <dd><a href="{:U('Order/orderList')}">订单列表</a></dd>
+        <dt><span class="glyphicon glyphicon-comment"></span> 评论管理</dt>
+        <dd><a href="{:U('Review/reviewList')}">评论列表</a></dd>
+      </dl>
+    </div>
+
+
+    <!-- main-content -->
+    <block name="main-content"></block>
+      
+
+      </div>
+    </div>
+
+
+
+    <!-- footer -->
+    <footer class="footer">
+      <p>商城后台管理系统 &copy;<a href="mailto:1005411480a@gmail.com">Zhigang Song</a>.</p>
+    </footer>
+    
+    <block name="javascript-bottom"></block>
+  </body>
+</html>

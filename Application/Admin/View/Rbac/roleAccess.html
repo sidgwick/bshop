@@ -1,11 +1,15 @@
-<include file="common:header" />
-<title>用户组权限配置</title>
-<link rel="stylesheet" href="__CSS__/list.css" />
-<include file="common:top" />
+<extend name="Common:base" />
 
-<div class="container-fluid">
-  <div class="row">
-    <include file="common:left" />
+<block name="stylesheet">
+<link rel="stylesheet" href="__CSS__/list.css" />
+</block>
+
+<block name="title">
+<title>用户组权限配置</title>
+</block>
+
+<block name="main-content">
+
     <div class="col-sm-9 col-md-10 main">
 <h1>配置{$rid|get_role_name}权限</h1>
       <form method="post" action="{:U('Rbac/roleAccess')}">
@@ -43,6 +47,5 @@
     </form>
     </div>
 
-  </div>
-</div>
-<include file="common:footer" />
+
+</block>
