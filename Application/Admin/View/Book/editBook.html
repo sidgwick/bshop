@@ -15,6 +15,9 @@
 
 <block name="javascript-bottom">
 <script type="text/javascript" src="__JS__/newBook.js"></script>
+<script>
+var delete_image_url = "{:U('Book/deleteCover', '', '')}";
+</script>
 </block>
 
 <block name="main-content">
@@ -78,7 +81,7 @@
       </div>
       <label for="inputTranslaterNationality" class="col-md-1 control-label">国籍</label>
       <div class="col-sm-3">
-        <select name="a_nationality[]" id="inputAuthorNationality" class="form-control">
+        <select name="t_nationality[]" id="inputAuthorNationality" class="form-control">
           <foreach name="country_list" item="nation">
           <if condition="$a['nation_id'] == $nation['id']">
           <option value="{$nation['id']}" selected="selected">{$nation['name']}({$nation['remark']})</option>
@@ -131,10 +134,22 @@
         </select>
       </div>
     </div>
-    <!-- TODO: 这里将来加上能编辑图片的JS代码-->
+    
     <div class="form-group more">
       <label for="inputCover" class="col-md-1 control-label">图书封面</label>
       <div class="col-sm-8">
+          <foreach name="cover_list" item="cover">
+            <div class="col-sm-4 cover-item">
+              <img width="220px" height="250px" src="__PUBLIC__/Book_img/{$b.bid}/{$cover.name}" class="cover" />
+              <a href="javascript:void(0)" class="btn btn-danger delete_img">删除图片</a>
+            </div>
+          </foreach>
+      </div>
+    </div>
+    
+    <div class="form-group more">
+      <label for="inputCover" class="col-md-1 control-label">更多封面</label>
+      <div class="col-sm-6 more-cover">
         <input type="file"  id="inputCover" name="cover[]" />
       </div>
       <div class="col-sm-3 more-area">
@@ -143,24 +158,26 @@
         </button>
       </div>
     </div>
-    <div class="form-group">
-      <label for="inputBrief" class="col-md-1 control-label">简要描述</label>
-      <div class="col-sm-11">
+    
+         <div class="form-group">
+            <label for="brief" class="col-md-1 control-label">简要描述</label>
+            <div class="col-sm-11">
 
-        <script id="brief-desc" name="brief" type="text/plain">{$b.brief|htmlspecialchars_decode}</script>
-        <script type="text/javascript"> var ue = UE.getEditor('brief-desc'); </script>
+               <textarea name="brief" id="brief">{$b.brief|htmlspecialchars_decode}</textarea>
 
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputDescription" class="col-md-1 control-label">图书介绍</label>
-      <div class="col-sm-11">
-
-        <script id="container" name="description" type="text/plain">{$b.description|htmlspecialchars_decode}</script>
-        <script type="text/javascript"> var ue = UE.getEditor('container'); </script>
-
-      </div>
-    </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDescription" class="col-md-1 control-label">图书介绍</label>
+            <div class="col-sm-11">
+            
+            <script type="text/plain" id="description" name="description">
+              {$b.description|htmlspecialchars_decode}
+            </script>
+            <script type="text/javascript"> var ue = UE.getEditor('description'); </script>
+               
+              </div>
+          </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <input type="hidden" name="bid" value="{$b.bid}" />

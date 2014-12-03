@@ -7,3 +7,30 @@
 .main{
     padding-left: 40px;
 }
+
+textarea#brief {
+    width: 90%;
+    height: 150px;
+}
+
+#description {
+    width: 90%;
+}
+
+.cover {
+    width: 150px;
+    height: 200px;
+    border: 2px solid #CCC;
+    padding: 5px;
+}
+
+.cover-img-delete {
+    width: 150px;
+    height: 200px;
+    border: 2px solid red;
+    padding: 5px;
+}
+
+.cover-item a {
+    margin-top: 15px;
+}
