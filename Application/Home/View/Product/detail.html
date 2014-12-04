@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="__CSS__/common.css" id="colors">
 </block>
 
+<block name="javascript">
+<script src="__JS__/cart.js"></script>
+</block>
+
 <block name="breadcrumbs">
 <!-- Titlebar -->
 <section class="titlebar">
@@ -78,13 +82,13 @@
 
             <section class="linking">
 
-                <form action='single-product-page.html#'>
+                <form action='#'>
                     <div class="qtyminus"></div>
                     <input type='text' name="quantity" value='1' class="qty" />
                     <div class="qtyplus"></div>
                 </form>
 
-                <a href="{:U('Cart/add', array('bid' => $product['bid']))}" class="button adc">加入购物车</a>
+                <a href="javascript:void(0)" addCartUrl="{:U('Cart/add', array('bid' => $product['bid']), '')}" class="button adc addCart">加入购物车</a>
                 <div class="clearfix"></div>
 
             </section>

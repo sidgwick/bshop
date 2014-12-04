@@ -5665,7 +5665,7 @@ img.rsImg {
 .rsDefault .rsPreloader {
 	width:20px;
 	height:20px;
-	background-image:url(http://vasterad.com/themes/trizzy/images/preloader.gif);
+	background-image:url(../images/loader.gif);
 	left:50%;
 	top:50%;
 	margin-left:-10px;

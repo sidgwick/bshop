@@ -4,7 +4,7 @@
 
     <!-- Button -->
     <div class="cart-btn">
-      <a href="{:U('Cart/index')}" class="button adc">$178.00</a>
+      <a href="{:U('Cart/index')}" class="button adc">¥{$cart['total']}</a>
     </div>
 
     <div class="cart-list">
@@ -12,23 +12,32 @@
       <div class="arrow"></div>
 
       <div class="cart-amount">
-        <span>2 items in the shopping cart</span>
+        <span>购物车里有{$cart['items']|count}样东西</span>
       </div>
 
-      <ul>
-        <li>
-        <a href="index.html#"><img src="__IMG__/small_product_list_08.jpg" alt="" /></a>
-        <a href="index.html#">Converse All Star Trainers</a>
-        <span>1 x $79.00</span>
-        <div class="clearfix"></div>
-        </li>
+      <!-- 更新购物车会用到的URL变量 -->
+      <script>
+        var product_detail_url = "{:('Product/detail')}";
+        var product_image_url = "__PUBLIC__/Book_img/";
+      </script>
 
+      <ul>
+
+        <foreach name="cart.items" item="book" key="k">
+        <if condition="$k lt 2">
         <li>
-        <a href="index.html#"><img src="__IMG__/small_product_list_09.jpg" alt="" /></a>
-        <a href="index.html#">Tommy Hilfiger <br /> Shirt Beat</a>
-        <span>1 x $99.00</span>
+        <a href="{:U('Product/detail', array('bid' => $book['id']))}" class="to_detail">
+          <img src="__PUBLIC__/Book_img/{$book.id}/main.jpg" alt="" class="cover_img" />
+        </a>
+        <a href="{:U('Product/detail', array('bid' => $book['id']))}" class="to_detail book_title">{$book.title}</a>
+        <span class="quantity_price">{$book.quantity} x ¥{$book.price}</span>
         <div class="clearfix"></div>
         </li>
+        <elseif condition="$k == 2"/>
+        <li>目前仅显示2件, 更多请到购物车查看</li>
+        </if>
+        </foreach>
+
       </ul>
 
       <div class="cart-buttons button">

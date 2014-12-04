@@ -13,6 +13,13 @@ class HomeController extends Controller {
             $this->assign('login', true);
             $this->assign('uname', $this->uname);
         }
+
+        // 初始化购物车, 购物车是一个数组
+        if (!is_array($this->cart)) {
+            session('cart', array('items' => array(), 'total' => 0));
+        }
+
+        $this->assign('cart', $this->cart);
     }
 
     public function __get($key) {
