@@ -1,0 +1,143 @@
+<extend name="Common:base" />
+
+<block name="title"><title>购物车 - 爱读书店</title></block>
+
+<block name="stylesheet">
+<link rel="stylesheet" href="__CSS__/common.css" id="colors">
+</block>
+
+<block name="javascript">
+<script src="__JS__/cart.js"></script>
+</block>
+
+<block name="breadcrumbs">
+<!-- Titlebar -->
+<section class="titlebar">
+    <div class="container">
+        <div class="sixteen columns">
+            <h2>购物车</h2>
+
+            <nav id="breadcrumbs">
+                <ul>
+                    <li><a href="{:U('Index/index')}">首页</a></li>
+                    <li>购物车</li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</section>
+</block>
+
+<block name="main-content">
+
+<div class="container cart">
+
+  <if condition="count($cart['items'])">
+  <div class="sixteen columns">
+
+    <!-- Cart -->
+    <table class="cart-table responsive-table" id="cart-display-table">
+
+      <tr>
+        <th>商品</th>
+        <th>标题</th>
+        <th>单价</th>
+        <th>数量</th>
+        <th>单件合计</th>
+        <th>操作</th>
+      </tr>
+
+      <foreach name="cart['items']" item="v">
+      <!-- Item -->
+      <tr class="signle-book">
+        <td class="item-img">
+          <img purl="__PUBLIC__/Book_img/" src="__PUBLIC__/Book_img/{$v.id}/main.jpg" alt="{$v['title']}" class="cover_img_small" />
+        </td>
+        <td class="cart-title">
+          <a href="{:U('Product/detail', array('bid' => $v['id']))}" purl="{:U('Product/detail', '', '')}">{$v['title']}</a>
+        </td>
+        <td class="signle-price">¥{$v['price']}</td>
+        <td class="quantity-id-area">
+          <div class="qtyminus"></div>
+          <input type="text" name="quantity" value="{$v['quantity']}" class="qty" autocomplete="off" />
+          <div class="qtyplus"></div>
+          <input type="hidden" name="id" value="{$v['id']}" />
+        </td>
+        <td class="cart-total">¥{$v['price'] * $v['quantity'] | number_format=###,2}</td>
+        <td><a href="javascript:void(0)" class="cart-remove"></a></td>
+      </tr> 
+      <!-- /Item -->
+      </foreach>
+
+
+    </table>
+
+    <!-- Apply Coupon Code / Buttons -->
+    <table class="cart-table bottom">
+
+      <tr>
+        <th>
+          <form class="apply-coupon">
+            <input class="search-field" type="text" placeholder="优惠码" value=""/>
+            <a href="javascript:alert('此功能暂时不开放')" class="button gray">使用优惠码</a>
+          </form>
+
+          <div class="cart-btns">
+            <a href="{:U('Cart/checkout')}" class="button color cart-btns proceed">去结算</a>
+            <a href="javascript:void(0)" class="button gray cart-btns" update-url="{:U('Cart/updateCart', '', '')}" id="update-cart-btn">更新购物车</a>
+          </div>
+        </th>
+      </tr>
+
+    </table>
+  </div>
+
+  <!-- Cart Totals -->
+  <div class="eight columns cart-totals">
+    <h3 class="headline">购物车统计</h3><span class="line"></span><div class="clearfix"></div>
+
+    <table class="cart-table margin-top-5">
+
+      <tr>
+        <th>商品总价</th>
+        <td id="cal-cart-total"><strong id="amount">¥{$cart['total'] | number_format=###,2}</strong></td>
+      </tr>
+
+      <tr>
+        <th>邮费</th>
+        <td id="cal-ship-fee">¥0.00</td>
+      </tr>
+
+      <tr>
+        <th>订单总计</th>
+        <td id="cal-order-total"><strong id="order-total">¥{$cart['total'] + 0 | number_format=###,2}</strong></td>
+      </tr>
+
+    </table>
+    <!-- <br><a href="#" class="calculate-shipping"><i class="fa fa-arrow-circle-down"></i> Calculate Shipping</a> -->
+  </div>
+  <else />
+
+
+  <!-- Container -->
+  <div class="container">
+
+    <div class="sixteen columns">
+      <section id="not-found">
+        <h4 style="text-align: center;"><i class="fa fa-shopping-cart"></i></h4>
+        <p>您当前的购物车为空!!!</p>
+      </section>
+    </div>
+
+  </div>
+  <!-- Container / End -->
+
+  </if>
+
+</div>
+
+<div class="margin-top-40"></div>
+
+
+</block>

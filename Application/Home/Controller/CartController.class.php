@@ -52,7 +52,7 @@ class CartController extends AccountController {
             }
 
             // 把新的购物车信息写到session里面去
-            $cart['items'] = $items;
+            $cart['items'] = array_values($items);
             $cart['total'] = 0;
             // 总价啊什么的, 更新下
             foreach ($items as $key => $value) {
@@ -70,6 +70,53 @@ class CartController extends AccountController {
     }
 
     /*
+     * 更新购物车
+     */
+    public function updateCart() {
+        $post = file_get_contents("php://input");
+        // 新的数据
+        $json = json_decode($post, true);
+        $cart = $this->cart;
+        $items = $cart['items'];
+        $total = 0;
+        foreach ($items as $key => $value) {
+            // 首先, 看看这个商品是不是还在购物车里面
+            $in = false;
+            $quantity = 0;
+            $new = array();
+            foreach ($json as $nv) {
+                if ($nv['id'] == $value['id']) {
+                    // 哈哈, 还在呢
+                    $in = true;
+                    $quantity = $nv['quantity'];
+                    break;
+                }
+            }
+
+            // 不再购物车里面
+            if (!$in) {
+                unset($items[$key]);
+                continue;
+            }
+
+            // 光在还不行, 你数量为0, 就是在逗我们的订单机器人啊
+            if ($quantity) {
+                $items[$key]['quantity'] = $quantity;
+                $total += $quantity * $items[$key]['price'];
+            } else {
+                unset($items[$key]);
+                continue;
+            }
+        }
+        
+        $cart['items'] = array_values($items);
+        $cart['total'] = $total;
+        $this->cart = $cart;
+
+        $this->ajaxReturn($cart);
+    }
+
+    /*
      * 清空购物车
      */
     public function emptyCart() {
@@ -80,6 +127,6 @@ class CartController extends AccountController {
      * 显示购物车
      */
     public function showCart() {
-       print_r($this->cart);
+        print_r($this->cart);
     }
 }
