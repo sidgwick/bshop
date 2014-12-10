@@ -1,0 +1,320 @@
+@import url("address.css");
+
+.hidden-block {
+    display: none;
+}
+
+dl.delivery-address{
+    margin-bottom: 20px;
+}
+
+dl.delivery-address dt {
+    float: left;
+    width: 160px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+dt {
+    font-weight: 700;
+}
+
+dt, dd {
+    line-height: 1.6;
+}
+
+dl.delivery-address dd {
+    margin-left: 180px;
+}
+dd {
+    margin-left: 0px;
+}
+
+p#delevery-method {
+    padding: 5px 0px 10px 100px;
+    font-weight: 700;
+}
+
+p#delevery-method span{
+    font-weight: normal;
+}
+
+.checkout-content .one-third.column {
+    width: 30% !important;
+}
+
+.checkout-content .two-thirds.column {
+    width: 60% !important;
+}
+
+div#address-list > ul {
+    margin: 20px 0;
+    border-bottom: 1px solid #EEE;
+}
+
+div#address-list > ul {
+    margin: 20px 0;
+}
+
+div#address-list > ul li{
+    margin: 15px 0 15px 25px;
+}
+
+div#address-list ul li input.address-selector {
+    width: 20px;
+    float: left;
+    margin: 3px 0px 0px;
+    cursor: pointer;
+}
+
+div#address-list ul li label.address-selector-label{
+    width: 80%;
+    margin-left: 25px;
+    color: #606060;
+}
+
+/* Checkout
+-------------------------------------- */
+
+.checkout-section {
+	background:#f4f4f4;
+	color: #808080;
+	font-size: 16px;
+	font-weight: 600;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	margin: 0 0 15px 0;
+}
+
+.checkout-section.active {
+	background: #3acf87;
+	color: #fff;
+}
+
+a:hover .checkout-section {
+	background: #606060;
+	color: #fff;
+}
+
+.checkout-section p {
+	position: relative;
+	display: inline-block;
+}
+
+.checkout-section span {
+	background: rgba(0,0,0,0.05);
+	display: inline-block;
+	padding: 14px 22px 12px 22px;
+	font-weight: 700;
+	font-size: 14px;
+	margin: 0 10px 0 0;
+	color: #909090;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.checkout-section.active span {
+	background: rgba(0,0,0,0.0.9);
+	color: #fff;
+}
+
+a:hover .checkout-section span {
+	background: rgba(0,0,0,0.15);
+	color: #fff;
+}
+
+.checkout-content,
+.checkout-delivery,
+.checkout-summary {
+	margin-bottom: 20px;
+	border-bottom: 1px solid #eee;
+	padding: 0 3px;
+}
+
+.checkout-summary,
+.checkout-delivery.active {
+	border:0;
+	margin-bottom:0;
+}
+
+.continue.button {
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+	margin: 0 0 30px 0;
+}
+
+/* Forms */
+.checkout-content select,
+.checkout-summary select {
+	padding: 10px 12px;
+	cursor: pointer;
+}
+
+.checkout-content select,
+.checkout-content input {
+	margin: 0 0 15px 0;
+	width: 95.4%;
+}
+
+.checkout-content .half {
+	display: inline-block;
+	width: 45.8%;
+}
+
+.checkout-content .half.first {
+	padding: 0 30px 0 0;
+}
+
+.checkout-content .fullwidth,
+.checkout-content .fullwidth select,
+.checkout-content select.fullwidth {
+	display: inline-block;
+	width: 97%;
+}
+
+.checkout-content input.fullwidth,
+.checkout-content .fullwidth input {
+	display: inline-block;
+	width: 95%
+}
+
+a:hover .checkout-section strong {color: #fff;}
+
+.checkout-section strong {
+	float: right;
+	font-size: 14px;
+	margin: 13px 15px 0 0;
+	color: #808080;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.checkout-section strong i {
+	margin: 0 3px 0 0;
+}
+
+.checkout-section strong.edit-btn {
+	cursor: pointer;
+}
+
+
+/* ------------------------------------------------------------------- */
+/* Media Queries
+---------------------------------------------------------------------- */
+
+/* Smaller than standard 1180 (devices and browsers) */
+@media only screen and (min-width: 960px) and (max-width: 1389px) {
+        .checkout-content .half {
+		width: 44.5%;
+	}
+
+	.checkout-content .half.first {
+		padding: 0 30px 0 0;
+	}
+
+	.checkout-content .fullwidth,
+	.checkout-content .fullwidth select,
+	.checkout-content select.fullwidth {
+		width: 97%;
+	}
+
+	table.checkout.cart-table td {padding: 15px;}
+
+	.checkout-content select,
+	.checkout-content input {
+		width: 93.5%;
+	}
+
+	.checkout-content .half {
+		width: 44.5%;
+	}
+
+	.checkout-content .half.first {
+		padding: 0 30px 0 0;
+	}
+
+	.checkout-content .fullwidth,
+	.checkout-content .fullwidth select,
+	.checkout-content select.fullwidth {
+		width: 97%;
+	}
+
+
+}
+
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 990px) {
+	.checkout-content select,
+	.checkout-content input {
+		width: 92.4%;
+	}
+
+	.checkout-content .half {
+		width: 43.2%;
+	}
+
+	.checkout-content .half.first {
+		padding: 0 30px 0 0;
+	}
+
+	.checkout-content .fullwidth,
+	.checkout-content .fullwidth select,
+	.checkout-content select.fullwidth {
+		width: 97%;
+	}
+}
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+.checkout-content .half {
+		width: 44%;
+	}
+
+	.checkout-content .half.first {
+		padding: 0 30px 0 0;
+	}
+
+
+	.checkout-content select,
+	.checkout-content input {
+		width: 93.5%;
+	}
+	.checkout-content .fullwidth,
+	.checkout-content .fullwidth select,
+	.checkout-content select.fullwidth {
+		width: 97%;
+	}
+
+}
+
+
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+	.checkout-content .half {
+		width: 95%;
+	}
+
+	.checkout-content .half.first {
+		padding: 0 30px 0 0;
+	}
+
+	.checkout-content .fullwidth,
+	.checkout-content .fullwidth select,
+	.checkout-content select.fullwidth {
+		width: 95%;
+	}
+}

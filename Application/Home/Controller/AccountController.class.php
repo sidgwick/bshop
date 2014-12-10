@@ -55,7 +55,9 @@ class AccountController extends HomeController {
         $data['city'] = I('city');
         $data['country'] = I('country');
         $data['street'] = I('street');
+        $data['zipcode'] = I('zipcode');
         $data['receiver'] = I('receiver');
+        $data['mobile'] = I('mobile');
         $data['uid'] = $this->uid;
 
         $db = D('address');
@@ -64,9 +66,6 @@ class AccountController extends HomeController {
         if ($record) {
             $this->error('请勿重复添加收货地址');
         }
-
-        // mobile允许不同
-        $data['mobile'] = I('mobile');
 
         if (!$db->create($data)) {
             $this->error($db->getError());

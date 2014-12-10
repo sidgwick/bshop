@@ -7,10 +7,10 @@
 </block>
 
 <block name="javascript">
-<script src="__JS__/address.js"></script>
 <script>
-  var subregion = "{:U('Cart/subregion')}";
+  var subregion = "{:U('Cart/subregion', '', '')}";
 </script>
+<script src="__JS__/address.js"></script>
 </block>
 
 <block name="breadcrumbs">
@@ -43,35 +43,46 @@
     <form method="post" action="{:U('Account/address')}" class="address-content">
 
       <div class="fullwidth" id="address">
-        <label class="billing">请选择省/市/区/县: <abbr>*</abbr></label>
-        <select name="province" class="address-one-third columns" id="province">
-          <option value="" id="default-province">选择省</option>
-          <foreach name="province" item="p">
-          <option value="{$p['id']}" id="{$p.name}">{$p.name}</option>
-          </foreach>
-        </select>
-        <select name="city" class="address-one-third columns" id="city">
-          <option value="">选择市</option>
-        </select>
-        <select name="country" class="address-one-third columns" id="country">
-          <option value="">选择区/县</option>
-        </select>
+        <div class="one-third column">
+          <label for="province">省<span class="required">*</span</label>
+          <select name="province" id="province" class="address-select-input">
+            <foreach name="province" item="p">
+            <option value="{$p['id']}" id="{$p.name}">{$p.name}</option>
+            </foreach>
+          </select>
+        </div>
+        <div class="one-third column">
+          <label for="city">市/区<span class="required">*</span</label>
+          <select name="city" id="city" class="address-select-input">
+            <option value="">请选择市/区</option>
+          </select>
+        </div>
+        <div class="one-third column">
+          <label for="country">县/区<span class="required">*</span</label>
+          <select name="country" id="country" class="address-select-input">
+            <option value="">请选择县/区</option>
+          </select>
+        </div>
+        <div class="clearfix"></div>
       </div>
-      
-      <p class="form-row form-row-wide address">
-      <label for="street">街道地址<span class="required">*</span></label>
-      <input type="text" class="input-text" name="street" id="street" value="" placeholder="街道地址" />
-      </p>
-      
-      <p class="form-row form-row-wide address-two columns horizontal">
-      <label for="receiver">收货人<span class="required">*</span></label>
-      <input type="text" class="input-text" name="receiver" id="receiver" value="" placeholder="收货人" />
-      </p>
 
-      <p class="form-row form-row-wide address-two columns horizontal">
-      <label for="mobile">联系电话<span class="required">*</span></label>
-      <input type="text" class="input-text" name="mobile" id="mobile" value="" placeholder="联系电话" />
-      </p>
+      <div class="two-thirds column">
+        <label for="street">街道地址<span class="required">*</span></label>
+        <input type="text" name="street" id="street" value="" placeholder="街道地址" />
+      </div>
+      <div class="one-third column">
+        <label for="zipcode">邮政编码<span class="required">*</span></label>
+        <input type="text" name="zipcode" id="zipcode" value="" placeholder="邮政编码" />
+      </div>
+
+      <div class="eight columns">
+        <label for="receiver">收货人<span class="required">*</span></label>
+        <input type="text" class="input-text" name="receiver" id="receiver" value="" placeholder="收货人" />
+      </div>
+      <div class="eight columns">
+        <label for="mobile">联系电话<span class="required">*</span></label>
+        <input type="text" class="input-text" name="mobile" id="mobile" value="" placeholder="联系电话" />
+      </div>
 
       <div class="clearfix"></div>
 

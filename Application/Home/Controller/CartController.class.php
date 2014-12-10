@@ -129,4 +129,27 @@ class CartController extends AccountController {
     public function showCart() {
         print_r($this->cart);
     }
+
+    /*
+     * 结算
+     */
+    public function checkout() {
+        $db = M('user');
+
+        $where = array('id' => $this->uid);
+        $fields = array('mobile', 'email');
+        $u = $db->where(array('id' => $this->uid))->field($fields)->find();
+
+        // 最先把省份列出来
+        $db = M('region');
+        $province = $db->where(array('pid' => 0))->select();
+
+        $vdb = D('AddressView');
+        $address = $vdb->where(array('uid' => $this->uid))->select();      
+
+        $this->assign('user', $u);
+        $this->assign('province', $province);
+        $this->assign('address', $address);
+        $this->display();
+    }
 }

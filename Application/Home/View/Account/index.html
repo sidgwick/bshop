@@ -74,7 +74,7 @@
     <div class="clearfix"></div>
     <ul class="list-address color">
       <foreach name="address" item="a">
-      <li>{$a['province']} {$a['city']} {$a['country']} {$a['street']} {$a['receiver']}(收) {$a['mobile']}</li>
+      <li>{$a['province']} {$a['city']} {$a['country']} {$a['street']}, 邮编({$a['zipcode']}) {$a['receiver']}(收) {$a['mobile']}</li>
       </foreach>
     </ul>
     <div class="clearfix"></div>

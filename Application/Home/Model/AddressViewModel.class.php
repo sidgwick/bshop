@@ -9,6 +9,7 @@ class AddressViewModel extends ViewModel {
     public $viewFields = array(
         'Address' => array(
             'street',
+            'zipcode',
             'receiver',
             'mobile',
         ),

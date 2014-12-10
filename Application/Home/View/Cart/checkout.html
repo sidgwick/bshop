@@ -1,0 +1,94 @@
+<extend name="Common:base" />
+
+<block name="title"><title>结算 - 爱读书店</title></block>
+
+<block name="stylesheet">
+<link rel="stylesheet" href="__CSS__/common.css" id="colors">
+<link rel="stylesheet" href="__CSS__/checkout.css" id="colors">
+</block>
+
+<block name="javascript">
+<script>
+  var subregion = "{:U('Cart/subregion', '', '')}";
+</script>
+<script src="__JS__/checkout.js"></script>
+<script src="__JS__/address.js"></script>
+</block>
+
+<block name="breadcrumbs">
+<!-- Titlebar -->
+<section class="titlebar">
+  <div class="container">
+    <div class="sixteen columns">
+      <h2>结算</h2>
+
+      <nav id="breadcrumbs">
+        <ul>
+          <li><a href="{:U('Index/index')}">首页</a></li>
+          <li><a href="{:U('Cart/index')}">购物车</a></li>
+          <li>结算</li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</section>
+</block>
+
+<block name="main-content">
+
+<!-- Container -->
+<div class="container">
+
+<form method="post" action="{:U('Order/add')}" />
+  <include file="Cart:make_order" />
+</form>
+
+  <div class="margin-top-50"></div>
+
+  <!-- Checkout Cart -->
+  <div class="checkout-section cart">本次订单包含</div>
+  <!-- Cart -->
+  <table class="checkout cart-table responsive-table">
+
+    <tr>
+      <th class="hide-on-mobile">商品</th>
+      <th>名称</th>
+      <th>单价</th>
+      <th>数量</th>
+      <th>总价</th>
+    </tr>
+
+    <foreach name="cart['items']" item="v">
+    <!-- Item #1 -->
+    <tr>
+      <td class="hide-on-mobile"><img src="__PUBLIC__/Book_img/{$v.id}/main.jpg" alt="{$v['title']}" class="cover_img_small" /></td>
+      <td class="cart-title"><a href="{:U('Product/detail', array('bid' => $v['id']))}">{$v['title']}</a></td>
+      <td>¥{$v['price']}</td>
+      <td class="qty-checkout">{$v['quantity']}</td>
+      <td class="cart-total">¥{$v['price'] * $v['quantity'] | number_format=###,2}</td>
+    </tr>
+    </foreach>
+
+  </table>
+
+  <!-- Apply Coupon Code / Buttons -->
+  <table class="cart-table bottom">
+
+    <tr>
+      <th class="checkout-totals">
+        <div class="checkout-subtotal">
+          总计(不计邮费): <span>¥{$cart['total']}</span>
+        </div>
+      </th>
+    </tr>
+
+  </table>
+  <!-- Checkout Cart / End -->
+
+</div>
+<!-- Container / End -->
+
+<div class="margin-top-50"></div>
+
+</block>
