@@ -134,6 +134,10 @@ class CartController extends AccountController {
      * 结算
      */
     public function checkout() {
+        if (count($this->cart['items']) == 0) {
+            $this->error('您的购物车为空');
+        }
+
         $db = M('user');
 
         $where = array('id' => $this->uid);
@@ -144,11 +148,16 @@ class CartController extends AccountController {
         $db = M('region');
         $province = $db->where(array('pid' => 0))->select();
 
+        // 最先把省份列出来
+        $db = M('ship');
+        $ship = $db->select();
+        
         $vdb = D('AddressView');
         $address = $vdb->where(array('uid' => $this->uid))->select();      
 
         $this->assign('user', $u);
         $this->assign('province', $province);
+        $this->assign('ship', $ship);
         $this->assign('address', $address);
         $this->display();
     }

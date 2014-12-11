@@ -4,14 +4,40 @@ namespace Home\Controller;
 class OrderController extends AccountController {
 
     /*
+     * 显示订单列表
+     */
+    public function index() {
+
+        $ovdb = D('OrdersView');
+
+        $orders = $ovdb->where(array('uid' => $this->uid))->relationSelect();
+
+        $this->assign('orders_list', $orders);
+        $this->display();
+    }
+
+    /*
+     * 订单详情
+     */
+    public function detail() {
+        if (!($oid = I('id', '', 'intval'))) {
+            $this->error('404');
+        }
+
+        $ovdb = D('OrdersView');
+        $order = $ovdb->where(array('id' => $oid, 'uid' => $this->uid))->relationFind();
+
+        $this->assign('order', $order);
+        $this->display();
+    }
+
+    /*
      * 新建订单, 客户乐意花钱啦...
      */
     public function add() {
-        /* 1. 先检测地址是不是存放在数据库里的地址, 若是, 直接写入订单, 若不是,
-         *    需要把地址写进数据库, 在继续以后操作
-         * 2. 订单写入
-         * 3. 订单地址信息关联
-         */
+        if (count($this->cart['items']) == 0) {
+            $this->error('购物车为空!!!');
+        }
 
         $address['province'] = I('province');
         $address['city'] = I('city');
@@ -38,6 +64,7 @@ class OrderController extends AccountController {
         // 写入订单信息
         $order['aid'] = $aid;
         $order['uid'] = $this->uid;
+        $order['sid'] = I('shipping', 1, 'intval');
         $order['time'] = time();
         $order['status'] = 0;
         $odb = M('orders');
@@ -57,7 +84,7 @@ class OrderController extends AccountController {
         }
 
         $oidb = M('order_items');
-        if (!$oidb->addAll($order_items)) {
+        if (!($r = $oidb->addAll($order_items))) {
             $this->error('订单创建出错, 请稍后再试');
         } else {
             // 搞定, 需要清空购物车

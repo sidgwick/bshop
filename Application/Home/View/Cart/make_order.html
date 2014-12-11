@@ -99,23 +99,17 @@
 
       <ul class="delivery-options eight columns">
         <li><strong>请选择邮递方式</strong></li>
+        <foreach name="ship" item="shipping">
         <li>
         <div class="delivery-option">
-          <input id="shipping-address" type="radio" name="shipping-address" value="1" />
+          <input id="shipping-address" type="radio" name="shipping" value="{$shipping['id']}" />
           <label for="shipping-address" class="checkbox">
-            顺丰快递 <span>$9.99 <abbr class="sep">|</abbr> 2 - 4个工作日之内送到</span>
+            {$shipping['name']} <span>¥{$shipping['price']} <abbr class="sep">|</abbr> {$shipping['description']}</span>
           </label>
         </div>
         </li>
-        <li>
-        <div class="delivery-option">
-          <input id="shipping-address-2" type="radio" name="shipping-address" value="2" />
-          <label for="shipping-address-2" class="checkbox">
-            EMS <span>$14.99 <span class="sep">|</span> 7个工作日之内送到</span>
-          </label>
-        </div>
+        </foreach>
         <div class="clearfix"></div>
-        </li>
       </ul>
 
     </div>
