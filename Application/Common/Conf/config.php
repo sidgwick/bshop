@@ -11,10 +11,10 @@ return array(
     
     /* 数据库配置 */
     'DB_TYPE'   => 'mysql', // 数据库类型
-    'DB_HOST'   => '127.0.0.1', // 服务器地址
-    'DB_NAME'   => 'bshop', // 数据库名
-    'DB_USER'   => 'root', // 用户名
-    'DB_PWD'    => '1111',  // 密码
-    'DB_PORT'   => '3306', // 端口
+    'DB_HOST'   => $OPENSHIFT_MYSQL_DB_HOST, // 服务器地址
+    'DB_NAME'   => 'shop', // 数据库名
+    'DB_USER'   => 'adminStHAp5h', // 用户名
+    'DB_PWD'    => 'Bfl5pDqsVNNj',  // 密码
+    'DB_PORT'   => $OPENSHIFT_MYSQL_DB_PORT, // 端口
     'DB_PREFIX' => 'bs_', // 数据库表前缀
 );
