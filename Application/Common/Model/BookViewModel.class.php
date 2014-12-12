@@ -1,9 +1,4 @@
 <?php
-/*
- * OsChina的git托管演示平台上, thinkphp无法自动加载Common文件夹下
- * 的Model类, 导致没法演示, 这个问题在其他主机上没有问题
- */
-
 namespace Common\Model;
 use \Think\Model\ViewModel;
 

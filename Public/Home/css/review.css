@@ -1,0 +1,31 @@
+div.avatar img {
+    width: 50px;
+}
+
+/* Rate */
+.rate {
+	unicode-bidi: bidi-override;
+	direction: rtl;
+	font-size: 18px;
+	float: left;
+	cursor: pointer;
+}
+
+.rate span.star {
+	font-family: "FontAwesome";
+	font-weight: normal;
+	font-style: normal;
+	display: inline-block;
+	float: left;
+	padding-right: 2px;
+}
+
+.rate span.star:before {
+	content: "";
+	color: #e0e0e0;
+}
+
+.rate span.rate-select-on:before {
+	content: "";
+	color: #FFC741;
+}

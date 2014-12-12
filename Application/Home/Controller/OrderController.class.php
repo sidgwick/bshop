@@ -7,6 +7,9 @@ class OrderController extends AccountController {
      * 显示订单列表
      */
     public function index() {
+        if (!$this->uid) {
+            $this->error('请先登录', U('login'));
+        }
 
         $ovdb = D('OrdersView');
 
@@ -20,6 +23,10 @@ class OrderController extends AccountController {
      * 订单详情
      */
     public function detail() {
+        if (!$this->uid) {
+            $this->error('请先登录', U('login'));
+        }
+        
         if (!($oid = I('id', '', 'intval'))) {
             $this->error('404');
         }
@@ -35,6 +42,10 @@ class OrderController extends AccountController {
      * 新建订单, 客户乐意花钱啦...
      */
     public function add() {
+        if (!$this->uid) {
+            $this->error('请先登录', U('login'));
+        }
+        
         if (count($this->cart['items']) == 0) {
             $this->error('购物车为空!!!');
         }

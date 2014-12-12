@@ -1,0 +1,79 @@
+<!-- Reviews -->
+<section class="comments">
+  <if condition="count($review)">
+  <!-- Reviews list -->
+  <section class="comments">
+    <ul>
+      <foreach name="review" item='r'>
+      <li>
+      <div class="avatar">
+        <img src="/Public/avatar/{$r['uid']}.jpg" alt="" />
+      </div>
+      <div class="comment-content">
+        <div class="arrow-comment"></div>
+        <div class="comment-by">
+          <strong>{$r['username']}</strong>
+          <span class="date">{$r['time']|date='Y-m-d H:i:s', ###}</span>
+          <span class="date"><strong>评级: {$r['rate']}</strong></span>
+        </div>
+        <p>{$r['content']|htmlspecialchars_decode}</p>
+      </div>
+      </li>
+      </foreach>
+    </ul>
+  </section>
+  <div class="clearfix"></div>
+  <else />
+  <p class="margin-bottom-10">目前没有评论</p>
+  </if>
+
+  <if condition="$login">
+  <a href="#review-dialog" class="popup-with-zoom-anim button color margin-left-0">新加评论</a>
+
+  <div id="review-dialog" class="zoom-anim-dialog mfp-hide">
+    <h3 class="headline">添加评论</h3>
+    <span class="line margin-bottom-25"></span><div class="clearfix"></div>
+
+
+    <!-- Form -->
+    <form id="add-comment" class="add-comment">
+      <fieldset>
+
+        <div>
+          <label>姓名:</label>
+          <input type="text" value="{$uname}" disabled />
+        </div>
+
+        <div>
+          <label>给个星星: <span>*</span></label>
+          <input type="hidden" value="5" name="rate" />
+          <span class="rate">
+            <span class="star" rate="1"></span>
+            <span class="star" rate="2"></span>
+            <span class="star" rate="3"></span>
+            <span class="star" rate="4"></span>
+            <span class="star" rate="5"></span>
+          </span>
+          <div class="clearfix"></div>
+        </div>
+
+        <div>
+          <label>评论内容: <span>*</span></label>
+          <textarea cols="40" rows="3" name="content"></textarea>
+        </div>
+
+      </fieldset>
+
+      <input type="hidden" name="bid" value="{$product.bid}"/>
+
+      <a href="javascript:void(0)" id="add-review-btn" review-url="{:U('Review/add', '', '')}" class="button color">添加评论</a>
+      <div class="clearfix"></div>
+
+    </form>
+  </div>
+
+  <else />
+  <p>您当前尚未登录, 请首先登录, 然后评论</p>
+  <a href="{:U('Account/login')}" class="button color margin-left-0">登录</a>
+  </if>
+</section>

@@ -4,6 +4,13 @@ namespace Home\Controller;
 class CartController extends AccountController {
 
     /*
+     * 购物车
+     */
+    public function index() {
+        $this->display();
+    }
+
+    /*
      * 处理AJAX请求的下级region
      */
     public function subregion() {
@@ -22,7 +29,7 @@ class CartController extends AccountController {
     }
 
     /*
-     * 购物车
+     * 添加到购物车
      */
     public function add() {
         if (IS_AJAX) {
@@ -134,6 +141,10 @@ class CartController extends AccountController {
      * 结算
      */
     public function checkout() {
+        if (!$this->uid) {
+            $this->error('请先登录', U('login'));
+        }
+
         if (count($this->cart['items']) == 0) {
             $this->error('您的购物车为空');
         }

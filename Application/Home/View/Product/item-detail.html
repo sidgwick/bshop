@@ -4,10 +4,12 @@
 
 <block name="stylesheet">
 <link rel="stylesheet" href="__CSS__/common.css" id="colors">
+<link rel="stylesheet" href="__CSS__/review.css" id="colors">
 </block>
 
 <block name="javascript">
 <script src="__JS__/cart.js"></script>
+<script src="__JS__/review.js"></script>
 </block>
 
 <block name="breadcrumbs">
@@ -105,7 +107,7 @@
         <ul class="tabs-nav">
             <li class="active"><a href="#description_tab">商品详情</a></li>
             <li><a href="#parameter_tab">参数</a></li>
-            <li><a href="#review_tab">评论 <span class="tab-reviews">(0)</span></a></li>
+            <li><a href="#review_tab">评论 <span class="tab-reviews">({$review|count})</span></a></li>
         </ul>
 
         <!-- Tabs Content -->
@@ -165,59 +167,7 @@
             </div>
 
             <div class="tab-content" id="review_tab">
-
-                <!-- Reviews -->
-                <section class="comments">
-                    <p class="margin-bottom-10">目前没有评论</p>
-
-                    <a href="#review-dialog" class="popup-with-zoom-anim button color margin-left-0">新加评论</a>
-
-                    <div id="review-dialog" class="zoom-anim-dialog mfp-hide">
-                        <h3 class="headline">添加评论</h3>
-                        <span class="line margin-bottom-25"></span><div class="clearfix"></div>
-
-                        <!-- Form -->
-                        <form id="add-comment" class="add-comment" action="{:U('Review/add')}" method="post">
-                            <fieldset>
-
-                                <div>
-                                    <label>姓名:</label> <span class="review_name">{$uname}</span>
-                                </div>
-
-                                <div>
-                                    <label>Rating:</label>
-                                    <span class="rate">
-                                        <span class="star"></span>
-                                        <span class="star"></span>
-                                        <span class="star"></span>
-                                        <span class="star"></span>
-                                        <span class="star"></span>
-                                    </span>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                                <div class="margin-top-20">
-                                    <label>Email: <span>*</span></label>
-                                    <input type="text" value=""/>
-                                </div>
-
-                                <div>
-                                    <label>Review: <span>*</span></label>
-                                    <textarea cols="40" rows="3"></textarea>
-                                </div>
-
-                            </fieldset>
-
-                            <input type="hidden" name="bid" value="{$product.bid}"/>
-
-                            <a href="#" class="button color">添加拼论</a>
-                            <div class="clearfix"></div>
-
-                        </form>
-                    </div>
-
-                </section>
-
+                <include file="Product:make-review" />
             </div>
 
         </div>
