@@ -11,13 +11,19 @@ class ProductController extends HomeController {
         $bdb = D('BookView');
         $book = $bdb->where(array('bid' => $bid))->relationFind();
 
-        $cover = get_cover_img($bid);
 
-        $this->assign('product', $book);
-        $this->assign('cover_list', $cover);
+        if (count($book) > 0) {
 
-        $relative = $this->relativeProduct($book);
-        $this->assign('relative', $relative);
+            $cover = get_cover_img($bid);
+
+            $this->assign('product', $book);
+            $this->assign('cover_list', $cover);
+
+            $relative = $this->relativeProduct($book);
+            $this->assign('relative', $relative);
+        } else {
+            $this->assign('product', 0);
+        }
 
         $this->display();
     }

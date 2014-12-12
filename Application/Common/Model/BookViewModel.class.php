@@ -51,8 +51,12 @@ class BookViewModel extends ViewModel {
     public function relationFind() {
         $list = $this->select();
 
-        $book = $this->realtionMerge($list);
-        return $book[0];
+        if ($list) {
+            $book = $this->realtionMerge($list);
+            return $book[0];
+        } else {
+            return array();
+        }
     }
     
     /*
@@ -61,8 +65,12 @@ class BookViewModel extends ViewModel {
     public function relationSelect() {
         $list = $this->select();
 
-        $book = $this->realtionMerge($list);
-        return $book;
+        if ($list) {
+            $book = $this->realtionMerge($list);
+            return $book;
+        } else {
+            return array();
+        }
     }
 
     /*
