@@ -1,0 +1,80 @@
+
+/* Pagination
+------------------------------------- */
+.pagination {
+	margin: 0;
+	text-align: center;
+	overflow: hidden;
+}
+
+.pagination-next-prev {
+	position: relative;
+	top: -55px;
+}
+
+.pagination ul li {
+	display: inline-block !important;
+	margin: 0 2px !important;
+	padding: 0 !important;
+}
+
+.pagination ul li a,
+.pagination-next-prev ul li a {
+	padding: 9px 14px;
+	border-bottom: none;
+	display: inline-block;
+	color: #fff;
+	background-color: #c0c0c0;
+	font-weight: 700;
+	margin:0;
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
+}
+
+.current-page { background-color: #3acf87 !important; }
+
+.products .pagination ul li a,
+.products .pagination-next-prev ul li a {
+	background-color: #d0d0d0;
+}
+
+.pagination .current,
+.pagination ul li a:hover,
+.pagination-next-prev ul li a:hover {
+	background: #808080;
+	color: #fff;
+}
+
+.pagination-next-prev a.next { float: right; }
+.pagination-next-prev a.prev { float: left; }
+
+.pagination-next-prev ul li a { 
+	width: 36px;
+	height: 36px;
+	padding:0;
+}
+
+.pagination-next-prev .prev:before,
+.pagination-next-prev .next:before {
+	font-family: "FontAwesome";
+	font-size: 13px;
+	position: relative;
+	display: block;
+	line-height: 19px;
+}
+
+.pagination-next-prev .next:before { content: ""; margin: 9px 0 0 14px;}
+.pagination-next-prev .prev:before { content: ""; margin: 9px 0 0 12px; }
+
+
+/* Custom Margins for Pages */
+.products .pagination-next-prev a.prev { margin: 0 0 0 20px; }
+.pagination-next-prev.full-width a.prev { margin: 0 0 0 10px; }
+.pagination-next-prev.full-width a.next { margin: 0 10px 0 0; }
+
+.pagination-container { margin: 0 0 40px 0; }
+.products .pagination-container { margin: 50px 0 0 0; }
+.masonry.pagination-container { margin: 20px 0 40px 0; }

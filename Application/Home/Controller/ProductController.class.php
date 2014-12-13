@@ -12,14 +12,18 @@ class ProductController extends HomeController {
 
 
         if (count($book) > 0) {
+            $this->assign('product', $book);
 
             $cover = get_cover_img($bid);
-            $review = D('ReviewView')->where(array('bid' => $bid))->order(array('time' => 'desc'))->select();
-            $relative = $this->relativeProduct($book);
-
-            $this->assign('product', $book);
-            $this->assign('review', $review);
             $this->assign('cover_list', $cover);
+
+            $rdb = D('ReviewView');
+            $review_count = $rdb->reviewCount($bid);
+            $this->assign('review_count', $review_count);
+            $review_rate = $rdb->reviewRateAvg($bid);
+            $this->assign('review_rate', $review_rate);
+            
+            $relative = $this->relativeProduct($book);
             $this->assign('relative', $relative);
         } else {
             $this->assign('product', 0);

@@ -1,5 +1,75 @@
-div.avatar img {
-    width: 50px;
+span.review_count {
+    display: inline !important;
+}
+
+.avatar {
+	float: left;
+	display: inline-block;
+	position: absolute;
+	left: -90px;
+}
+
+.avatar img {
+	max-width: 70px !important;
+}
+
+/* Star Rating */
+.rating {
+	box-sizing: content-box;
+	overflow: hidden;
+	position: relative;
+	width: 100px;
+	height: 18px;
+	display: block;
+}
+
+.rating .star-rating {
+	position: relative;
+	width: inherit;
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+
+.rating.stars-5 .star-rating:after { width: 100%; }
+.rating.stars-4 .star-rating:after { width: 80%; }
+.rating.stars-3 .star-rating:after { width: 60%; }
+.rating.stars-2 .star-rating:after { width: 40%; }
+.rating.stars-1 .star-rating:after { width: 20%; }
+
+.rating.stars-0:after {
+	content:"    ";
+	font-family: "FontAwesome";
+	color: #e0e0e0;
+	display: block;
+	position: absolute;
+	font-size: 16px;
+	z-index: 10;
+	letter-spacing: -0.5px;
+}
+
+
+.rating .star-rating:after {
+	content:"    ";
+	font-family: "FontAwesome";
+	color: #ffc741;
+	display: block;
+	position: absolute;
+	font-size: 16px;
+	z-index: 10;
+	letter-spacing: -0.5px;
+}
+
+.rating .star-bg:after {
+	content:"    ";
+	font-family: "FontAwesome";
+	color: #e0e0e0;
+	display: block;
+	position: absolute;
+	font-size: 16px;
+	z-index: 9;	padding: 0;
+	margin: 0;
+	letter-spacing: -0.5px;
 }
 
 /* Rate */
@@ -28,4 +98,154 @@ div.avatar img {
 .rate span.rate-select-on:before {
 	content: "";
 	color: #FFC741;
+}
+
+
+
+.reviews-counter {
+	float: right;
+	position: absolute;
+	top: 2px;
+	right: 0;
+	font-size: 13px;
+	text-transform: uppercase;
+	padding: 0 10px 0 0;
+	color: #a0a0a0;
+	text-align: right;
+}
+
+.reviews-counter .stars-1,
+.reviews-counter .stars-2,
+.reviews-counter .stars-3,
+.reviews-counter .stars-4,
+.reviews-counter .stars-5 { text-align: left; }
+
+.reviews-counter .rating { right: -14px; }
+.reviews-counter span {
+	position: relative;
+	display: block;
+	margin: -2px 0 0 0;
+	color: #a0a0a0;
+}
+
+
+
+/* Comments
+------------------------------------- */
+.comments { margin: 10px 0 0 0; }
+
+.comments .button {
+	margin: 0 0 10px 90px;
+	padding: 7px 15px;
+}
+
+.comments ul li {
+	display: block;
+	margin: 0 0 20px 90px;
+	position: relative;
+}
+
+.comments ul li ul li {
+	margin: 20px 0 0 90px;
+}
+
+.comment-content p {
+	margin: 0;
+	line-height: 23px;
+}
+
+.comment-content {
+	background: #f8f8f8;
+	color: #888;
+	padding: 10px 20px 20px 15px;
+}
+
+.comment-content strong {
+	padding-right: 5px;
+	font-size: 14px;
+	color: #666;
+}
+
+.comment-content span {
+	color: #999;
+}
+
+.comments-amount {
+	color: #909090;
+}
+
+.comment-by {
+	width: 100%;
+	padding-bottom: 8px;
+	padding-top: 5px;
+}
+
+.comment-by span.reply {
+	float: right;
+	display: inline;
+}
+
+.comment-by span.reply a {
+	float: right;
+	height: 17px;
+	margin-left: 5px;
+	font-weight: normal;
+	color: #999;
+}
+
+.comment-by span.reply a i {
+	color: #bbb;
+	transition: all 0.1s ease-in-out;
+}
+
+.comment-by span.reply a:hover,
+.comment-by span.reply a:hover i {
+	color: #808080;
+}
+
+.comment-by .rating {
+	float: right;
+	position: relative;
+	margin: 0 -10px 0 0;
+}
+
+.comment-by .rating .star-bg:after {
+	color: #ddd;
+}
+
+.comment-by span.date {
+	color: #999;
+	font-weight: 300;
+	background: url('../images/comments-divider.png') no-repeat 0 55%;
+	padding: 0 0 0 9px;
+	margin: 0 0 0 2px;
+	float: none;
+	text-align: left;
+}
+
+/* Add Comment */
+.add-comment label {
+	margin: 0 0 4px 0;
+}
+
+.add-comment label span {
+	color: #e24747;
+}
+
+.add-comment input {
+	margin: 0 0 20px 0;
+	min-width: 240px;
+}
+
+.add-comment textarea {
+	margin: 0 0 18px 0;
+	width: auto;
+	min-width: 97.5%;
+	min-height: 180px;
+	resize: vertical;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	transition: none;
 }

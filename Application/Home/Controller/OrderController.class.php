@@ -100,7 +100,7 @@ class OrderController extends AccountController {
         } else {
             // 搞定, 需要清空购物车
             $this->cart = array('items' => array(), 'total' => 0);
-            $this->success('订单创建成功, 感谢您的购买', U('Account/index'));
+            $this->success('订单创建成功, 感谢您的购买', U('Order/index'));
         }
     }
 }

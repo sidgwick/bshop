@@ -4,16 +4,12 @@
 
 <block name="stylesheet">
 <link rel="stylesheet" href="__CSS__/common.css" id="colors">
-<link rel="stylesheet" href="__CSS__/product.css" id="colors">
+<link rel="stylesheet" href="__CSS__/review.css" id="colors">
 </block>
 
 <block name="javascript">
 <script src="__JS__/cart.js"></script>
 <script src="__JS__/review.js"></script>
-<script>
-var review_count = {$review_count};
-var review_url = "{:U('Review/ajaxGetMoreReview', array('bid' => $product['bid']), '')}";
-</script>
 </block>
 
 <block name="breadcrumbs">
@@ -38,20 +34,22 @@ var review_url = "{:U('Review/ajaxGetMoreReview', array('bid' => $product['bid']
 
 <block name="main-content">
 
+<!-- Container -->
 <div class="container">
-
+  <!-- Slider -->
   <div class="eight columns" >
     <div class="slider-padding">
-      <div id="product-slider" class="royalSlider rsDefault">
+      <div id="product-slider-vertical" class="royalSlider rsDefault">
         <foreach name="cover_list" item="cover">
         <a href="__PUBLIC__/Book_img/{$product.bid}/{$cover}" class="mfp-gallery" title="封面">
-          <img class="rsImg" src="__PUBLIC__/Book_img/{$product.bid}/{$cover}" data-rsTmb="__PUBLIC__/Book_img/{$product.bid}/{$cover}" alt="商品图片" />
+          <img class="rsImg" src="__PUBLIC__/Book_img/{$product.bid}/{$cover}" data-rsTmb="__PUBLIC__/Book_img/{$product.bid}/{$cover}" />
         </a>
         </foreach>
       </div>
       <div class="clearfix"></div>
     </div>
   </div>
+
 
   <!-- Content -->
   <div class="eight columns">
@@ -60,40 +58,41 @@ var review_url = "{:U('Review/ajaxGetMoreReview', array('bid' => $product['bid']
       <!-- Headline -->
       <section class="title">
         <h2>{$product.title}</h2>
-        <span class="product-price-discount">¥{$product.price}<i>¥{$product.price}</i></span>
-        <div class="reviews-counter">
-          <div class="rating stars-{$review_rate}">
-            <div class="star-rating"></div>
-            <div class="star-bg"></div>
-          </div>
-          <span><span class="review_count">{$review_count}</span> Reviews</span>
-        </div>
+        <span class="product-price">¥{$product.price}</span>
       </section>
 
       <!-- Text Parapgraph -->
       <section>
-        <p class="margin-reset">{$product.brief|htmlspecialchars_decode}</p>
+        <p class="margin-reset">
+        {$product.brief|htmlspecialchars_decode}
+        </p>
+
         <!-- Share Buttons -->	
         <div class="share-buttons">
           <ul>
-            <li><a href="variable-product-page.html#">Share</a></li>
-            <li class="share-facebook"><a href="variable-product-page.html#">Facebook</a></li>
-            <li class="share-twitter"><a href="variable-product-page.html#">Twitter</a></li>
-            <li class="share-gplus"><a href="variable-product-page.html#">Google Plus</a></li>
-            <li class="share-pinit"><a href="variable-product-page.html#">Pin It</a></li>
+            <li><a href="#">Share</a></li>
+            <li class="share-facebook"><a href="#">Facebook</a></li>
+            <li class="share-twitter"><a href="#">Twitter</a></li>
+            <li class="share-gplus"><a href="#">Google Plus</a></li>
+            <li class="share-pinit"><a href="#">Pin It</a></li>
           </ul>
         </div>
         <div class="clearfix"></div>
+
       </section>
 
+
       <section class="linking">
-        <form>
+
+        <form action='#'>
           <div class="qtyminus"></div>
           <input type='text' name="quantity" value='1' class="qty" />
           <div class="qtyplus"></div>
         </form>
+
         <a href="javascript:void(0)" addCartUrl="{:U('Cart/add', array('bid' => $product['bid']), '')}" class="button adc addCart">加入购物车</a>
         <div class="clearfix"></div>
+
       </section>
 
     </div>
@@ -108,7 +107,7 @@ var review_url = "{:U('Review/ajaxGetMoreReview', array('bid' => $product['bid']
     <ul class="tabs-nav">
       <li class="active"><a href="#description_tab">商品详情</a></li>
       <li><a href="#parameter_tab">参数</a></li>
-      <li><a href="#review_tab">评论 <span class="tab-reviews">(<span class="review_count">{$review_count}</span>)</span></a></li>
+      <li><a href="#review_tab">评论 <span class="tab-reviews">({$review|count})</span></a></li>
     </ul>
 
     <!-- Tabs Content -->
@@ -176,7 +175,5 @@ var review_url = "{:U('Review/ajaxGetMoreReview', array('bid' => $product['bid']
 </div>
 
 <include file="Product:related-products" />
-
-<div class="margin-top-50"></div>
 
 </block>

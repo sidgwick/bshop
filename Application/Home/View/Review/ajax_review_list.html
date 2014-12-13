@@ -1,0 +1,22 @@
+  <ul id="review-list">
+    <foreach name="list" item='r'>
+    <li>
+    <div class="avatar">
+      <img src="/Public/avatar/{$r['uid']}.jpg" alt="" />
+    </div>
+    <div class="comment-content">
+      <div class="arrow-comment"></div>
+      <div class="comment-by">
+        <strong>{$r['username']}</strong>
+        <span class="date">{$r['time']|date='Y-m-d H:i:s', ###}</span>
+        <div class="rating stars-{$r['rate']}">
+          <div class="star-rating"></div>
+          <div class="star-bg"></div>
+        </div>
+      </div>
+      <p>{$r['content']|htmlspecialchars_decode}</p>
+    </div>
+    </li>
+    </foreach>
+  </ul>
+  {$pages}

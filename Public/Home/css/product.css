@@ -1,0 +1,51 @@
+/* Product Page */
+@import url("pagination.css");
+@import url("review.css");
+
+.product-page {
+	position: relative;
+}
+.product-page h2 {
+	font-weight: 600;
+}
+
+.product-page .product-price,
+.product-page .product-price-discount {
+	font-size: 24px;
+	margin: 5px 0 0 0;
+	font-weight: 500;
+}
+
+.product-page .product-price-discount i {
+	font-weight: 600;
+}
+
+.product-page .product-price {
+	color: #888;
+	font-weight: 500;
+}
+
+.product-page .title {
+	padding: 0 0 20px 0;
+}
+
+.product-page section {
+	border-bottom: 1px solid #ebebeb;
+	padding: 20px 0;
+}
+
+.product-page section.project-section {
+	padding: 0 0 22px 0;
+}
+
+.product-page section p a:after {
+	content: "";
+	font-family: "FontAwesome";
+	margin: 0 1px 0 3px;
+	font-size: 13px;
+}
+
+
+.product-page section.title h2 {
+	width: 360px;
+}

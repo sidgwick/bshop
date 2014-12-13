@@ -1,28 +1,10 @@
 <!-- Reviews -->
 <section class="comments">
-  <if condition="count($review)">
-  <!-- Reviews list -->
-  <section class="comments">
-    <ul>
-      <foreach name="review" item='r'>
-      <li>
-      <div class="avatar">
-        <img src="/Public/avatar/{$r['uid']}.jpg" alt="" />
-      </div>
-      <div class="comment-content">
-        <div class="arrow-comment"></div>
-        <div class="comment-by">
-          <strong>{$r['username']}</strong>
-          <span class="date">{$r['time']|date='Y-m-d H:i:s', ###}</span>
-          <span class="date"><strong>评级: {$r['rate']}</strong></span>
-        </div>
-        <p>{$r['content']|htmlspecialchars_decode}</p>
-      </div>
-      </li>
-      </foreach>
-    </ul>
-  </section>
-  <div class="clearfix"></div>
+  <if condition="$review_count">
+    <!-- Reviews list -->
+    <section class="comments" id="review-list">
+    </section>
+    <div class="clearfix"></div>
   <else />
   <p class="margin-bottom-10">目前没有评论</p>
   </if>
