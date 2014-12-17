@@ -9,6 +9,10 @@
 
 .pagination-next-prev {
 	position: relative;
+	top: -35px;
+}
+.comments .pagination-next-prev {
+	position: relative;
 	top: -55px;
 }
 

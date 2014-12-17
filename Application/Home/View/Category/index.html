@@ -1,0 +1,106 @@
+<extend name="Common:base" />
+
+<block name="title"><title>商品分类 - 爱读书店</title></block>
+
+<block name="stylesheet">
+<link rel="stylesheet" href="__CSS__/common.css" id="colors">
+</block>
+
+<block name="javascript">
+<script src="__JS__/cart.js"></script>
+<script src="__JS__/category.js"></script>
+<script>
+var init_url = "{:U('Category/ajaxListItems', '', '')}";
+var cid = 0;
+var price_low = 0;
+var price_high = 200;
+var order = 1;
+</script>
+</block>
+
+<block name="breadcrumbs">
+<!-- Titlebar -->
+<section class="titlebar">
+  <div class="container">
+    <div class="sixteen columns">
+      <h2>商品分类</h2>
+
+      <nav id="breadcrumbs">
+        <ul>
+          <li><a href="{:U('Index/index')}">首页</a></li>
+          <li><a href="{:U('Product/index')}">全部商品</a></li>
+          <li>商品分类</li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</section>
+</block>
+
+<block name="main-content">
+<div class="container">
+
+
+<!-- Sidebar -->
+<div class="four columns">
+  <!-- Categories -->
+  <taglib name="Home\TagLib\Bs" />
+  <div class="widget margin-top-0">
+    <h3 class="headline">分类目录</h3><span class="line"></span><div class="clearfix"></div>
+
+    <ul id='categories'>
+      <Bs:categoryList list="$category_list">
+      <li>
+      <a href="{:U('Category/ajaxListItems', array('id' => $item['id']), '')}">{$item['remark']} <span>({$item['child']|count})</span></a>
+      CHILD_LIST
+      </li>
+      </Bs:categoryList>
+    </ul>
+
+    <div class="clearfix"></div>
+  </div>
+
+  <!-- Widget -->
+  <div class="widget">
+    <h3 class="headline">价格筛选</h3><span class="line"></span><div class="clearfix"></div>
+
+    <div id="price-range">
+      <div class="padding-range"><div id="slider-range"></div></div>
+      <label for="amount">价格:</label>
+      <input type="text" id="amount"/>
+      <a href="javascript:void(0)" id="price_filter" class="button color">筛选</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+</div>
+
+
+
+  <!-- Content -->
+  <div class="twelve columns">
+
+    <!-- Ordering -->
+    <select class="orderby" name="orderby" id="orderby" >
+      <option value="1">按价格从低到高</option>
+      <option value="2">按价格从高到底</option>
+      <option value="3">按销量从低到高</option>
+      <option value="4">按销量从高到底</option>
+      <option value="5">按评论从低到高</option>
+      <option value="6">按评论从高到底</option>
+    </select>
+
+  </div>
+
+  <!-- Products -->
+  <div class="twelve columns products" id="products_list">
+
+
+  </div>
+
+</div>
+
+<div class="margin-top-50"></div>
+
+</block>

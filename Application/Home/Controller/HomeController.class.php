@@ -20,6 +20,10 @@ class HomeController extends Controller {
         }
 
         $this->assign('cart', $this->cart);
+                
+        // 分类显示
+        $list = D('category')->categoryList();
+        $this->assign('category_list', $list);
     }
 
     public function __get($key) {

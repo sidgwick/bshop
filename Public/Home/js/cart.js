@@ -57,22 +57,7 @@ $(".qtyminus").click(function(e) {
 // 加入购物车按钮
 $('a.addCart').click(
     function () {
-        target = $(this).attr('addCartUrl');
-        if (!(quantity = $(this).attr('quantity'))) {
-            quantity = $('input[type="text"][name="quantity"]').val();
-        }
-        target = target + '/quantity/' + quantity;
-        $.getJSON(
-            target,
-            function (json){
-                if (json.result == true) {
-                    update_cart(json.cart);
-                    //alert('添加成功');
-                } else {
-                    alert('添加失败: ' + json.msg);
-                }
-            }
-        );
+      addCart(this);
     }
 );
 
@@ -85,9 +70,10 @@ $('td a.cart-remove').click(
 }
 );
 
+
 function update_cart(json) {
     // 修改购物车按钮
-    $('div#cart > div.cart-btn > a').text(json.total);
+    $('div#cart > div.cart-btn > a').text("¥" + json.total);
     // 修改购物车总数量
     $('div#cart > div.cart-list > div.cart-amount > span').text('购物车里有 ' + $(json.items).size() +' 件商品');
     // 购物车显示两个条目, 现在显示的不到两条,就增加显示.刚好有两条,
@@ -188,4 +174,23 @@ function update_display_price(obj) {
     total_obj.text('¥' + total.toFixed(2));
     order_total = order_total + diff;
     order_total_obj.text('¥' + order_total.toFixed(2));
+}
+
+function addCart(a) {
+    target = $(a).attr('addCartUrl');
+    if (!(quantity = $(a).attr('quantity'))) {
+        quantity = $('input[type="text"][name="quantity"]').val();
+    }
+    target = target + '/quantity/' + quantity;
+    $.getJSON(
+        target,
+        function (json){
+            if (json.result == true) {
+                update_cart(json.cart);
+                //alert('添加成功');
+            } else {
+                alert('添加失败: ' + json.msg);
+            }
+        }
+    );
 }

@@ -54,6 +54,8 @@ function load_review_list (url) {
                 function () {
                 t_url = $(this).attr('url_target');
                 load_review_list($(this).attr('url_target'));
+                scroll_to = $('ul.tabs-nav').offset().top;
+                $('html, body').animate({scrollTop:scroll_to}, 500);
             }
             );
         }

@@ -1,0 +1,30 @@
+<foreach name="list_items" item="v">
+<div class="four shop columns category-list-items">
+  <figure class="product">
+    <div class="mediaholder">
+      <a href="{:U('Product/detail', array('bid' => $v['id']))}">
+        <img alt="" src="__PUBLIC__/Book_img/{$v.id}/main.jpg"/>
+        <div class="cover">
+          <img alt="" src="__PUBLIC__/Book_img/{$v.id}/main.jpg"/>
+        </div>
+      </a>
+      <a href="javascript:void(0)" quantity="1" addCartUrl="{:U('Cart/add', array('bid' => $v['id']), '')}" class="addCart product-button">
+        <i class="fa fa-shopping-cart"></i> 加入购物车
+      </a>
+    </div>
+
+    <a href="{:U('Product/detail', array('bid' => $v['id']))}">
+        <section>
+            <h5>{$v.title}</h5>
+            <span class="product-price">¥{$v.price}</span>
+        </section>
+    </a>
+  </figure>
+</div>
+</foreach>
+
+<div class="clearfix"></div>
+
+
+<!-- Pagination -->
+{$page}

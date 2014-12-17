@@ -8,7 +8,7 @@ class OrderController extends AccountController {
      */
     public function index() {
         if (!$this->uid) {
-            $this->error('请先登录', U('login'));
+            $this->error('请先登录', U('Account/login'));
         }
 
         $ovdb = D('OrdersView');
@@ -24,7 +24,7 @@ class OrderController extends AccountController {
      */
     public function detail() {
         if (!$this->uid) {
-            $this->error('请先登录', U('login'));
+            $this->error('请先登录', U('Account/login'));
         }
         
         if (!($oid = I('id', '', 'intval'))) {
@@ -43,7 +43,7 @@ class OrderController extends AccountController {
      */
     public function add() {
         if (!$this->uid) {
-            $this->error('请先登录', U('login'));
+            $this->error('请先登录', U('Account/login'));
         }
         
         if (count($this->cart['items']) == 0) {

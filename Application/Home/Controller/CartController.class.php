@@ -142,7 +142,7 @@ class CartController extends AccountController {
      */
     public function checkout() {
         if (!$this->uid) {
-            $this->error('请先登录', U('login'));
+            $this->error('请先登录', U('Account/login'));
         }
 
         if (count($this->cart['items']) == 0) {

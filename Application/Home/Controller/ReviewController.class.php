@@ -8,7 +8,7 @@ class ReviewController extends AccountController {
      */
     public function add() {
         if (!$this->uid) {
-            $this->error('请先登录', U('login'));
+            $this->error('请先登录', U('Account/login'));
         }
 
         $content = file_get_contents('php://input');

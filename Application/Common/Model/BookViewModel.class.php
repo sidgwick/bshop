@@ -25,6 +25,7 @@ class BookViewModel extends ViewModel {
         ),
         'BookAuthor' => array(
             '_on' => 'Book.id = BookAuthor.book_id AND Author.id = BookAuthor.author_id',
+            '_type' => 'LEFT',
         ),
         'Country' => array(
             'id' => 'nation_id',
