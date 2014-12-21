@@ -1,3 +1,4 @@
+<if condition="count($list_items)">
 <foreach name="list_items" item="v">
 <div class="four shop columns category-list-items">
   <figure class="product">
@@ -22,6 +23,11 @@
   </figure>
 </div>
 </foreach>
+<else />
+<div style="padding: 50px 25px; font-weight: bold; font-size: 48px;">
+暂时没有相关商品
+</div>
+</if>
 
 <div class="clearfix"></div>
 

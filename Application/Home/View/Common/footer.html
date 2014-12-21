@@ -4,22 +4,21 @@
 
     <div class="four columns">
       <img src="__IMG__/logo-footer.png" alt="" class="margin-top-10"/>
-      <p class="margin-top-15">Nulla facilisis feugiat magna, ut molestie metus hendrerit vitae. Vivamus tristique lectus at varius rutrum. Integer lobortis mauris non consectetur eleifend.</p>
+      <p class="margin-top-15">BSHOP是网站作者做的一个试手作品, 这个网站并不出售任何物品, 所以, 亲, 请不要下单呦....</p>
     </div>
 
     <div class="four columns">
 
       <!-- Headline -->
-      <h3 class="headline footer">Customer Service</h3>
+      <h3 class="headline footer">客户服务</h3>
       <span class="line"></span>
       <div class="clearfix"></div>
 
       <ul class="footer-links">
-        <li><a href="index.html#">Order Status</a></li>
-        <li><a href="index.html#">Payment Methods</a></li>
-        <li><a href="index.html#">Delivery & Returns</a></li>
-        <li><a href="index.html#">Privacy Policy</a></li>
-        <li><a href="index.html#">Terms & Conditions</a></li>
+        <li><a href="{:U('Order/index')}">订单状态</a></li>
+        <li><a href="{:U('Order/paymentMethod')}">支付方式</a></li>
+        <li><a href="{:U('Order/deliveryMethod')}">配送方式与期限</a></li>
+        <li><a href="{:U('Feedback/policy')}">服务政策与使用协议</a></li>
       </ul>
 
     </div>
@@ -27,14 +26,14 @@
     <div class="four columns">
 
       <!-- Headline -->
-      <h3 class="headline footer">My Account</h3>
+      <h3 class="headline footer">我的账户</h3>
       <span class="line"></span>
       <div class="clearfix"></div>
 
       <ul class="footer-links">
-        <li><a href="index.html#">My Account</a></li>
-        <li><a href="index.html#">Order History</a></li>
-        <li><a href="index.html#">Wish List</a></li>
+        <li><a href="{:U('Account/index')}">我的帐户</a></li>
+        <li><a href="{:U('Account/address')}">配送地址管理</a></li>
+        <li><a href="{:U('Account/wishlist')}">心愿单</a></li>
       </ul>
 
     </div>
@@ -42,13 +41,13 @@
     <div class="four columns">
 
       <!-- Headline -->
-      <h3 class="headline footer">Newsletter</h3>
+      <h3 class="headline footer">最进动态</h3>
       <span class="line"></span>
       <div class="clearfix"></div>
-      <p>Sign up to receive email updates on new product announcements, gift ideas, special promotions, sales and more.</p>
+      <p>注册我们的会员可以享受更完全的服务. 你也可以在下方订阅我们推送的优惠信息.</p>
 
       <form action="index.html#" method="get">
-        <button class="newsletter-btn" type="submit">Join</button>
+        <button class="newsletter-btn" type="submit">订阅</button>
         <input class="newsletter" type="text" placeholder="mail@example.com" value=""/>
       </form>
     </div>

@@ -4155,7 +4155,7 @@ a.img-caption {
 	background-color: #f6f6f6;
 }
 
-.product section h5 { color: #707070; }
+.product section h5 { color: #707070; font-size: 14px; line-height: 18px; min-height: 40px; }
 
 .product-button {
 	width: 100%;
